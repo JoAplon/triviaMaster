@@ -6,6 +6,7 @@ import DifficultyMenu from './difficultyMenu';
 import CategoryMenu from './categoryMenu';
 import Leaderboard from './leaderboard';
 
+
 const Home = () => {
 
   const [showDifficultyMenu, setShowDifficultyMenu] = useState(false);

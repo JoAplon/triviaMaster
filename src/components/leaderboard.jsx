@@ -1,6 +1,7 @@
 import React from 'react';
 import '../css/leaderboard.css'
 
+
 const Leaderboard = ({ leaderboardData }) => {
   return (
     <div className="leaderboard">
