@@ -1,9 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
-import Header from './components/header'
-import Home from './components/homepage';
-import GameRoom from './components/gameRoom';
+import Header from '../src/components/header'
+import Home from '../src/components/homepage';
+import GameRoom from '../src/components/gameRoom';
+
 
 function App() {
 

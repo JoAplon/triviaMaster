@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import '../css/difficulty.css';
 
 const DifficultyMenu = ({ difficulties, onSelect, onClose }) => {
     const [selectedDifficulty, setSelectedDifficulty] = useState(null);
