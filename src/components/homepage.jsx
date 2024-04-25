@@ -1,10 +1,10 @@
 // Home.jsx
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../components/header';
-import DifficultyMenu from '../components/difficultyMenu';
-import CategoryMenu from '../components/categoryMenu';
-import Leaderboard from '../components/leaderboard';
+import Header from './header';
+import DifficultyMenu from './difficultyMenu';
+import CategoryMenu from './categoryMenu';
+import Leaderboard from './leaderboard';
 
 const Home = () => {
 

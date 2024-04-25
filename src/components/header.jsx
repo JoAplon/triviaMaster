@@ -1,7 +1,8 @@
 // Home.jsx
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import Tooltip from '../components/tooltip'
+import Tooltip from './tooltip'
+import '../css/header.css'
 
 const Header = () => {
     const location = useLocation();
