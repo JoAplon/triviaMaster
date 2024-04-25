@@ -5,8 +5,9 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+  background-color: #1a1a1a; /* Initial color */
+  background-image: linear-gradient(-5deg, #1a1a1a, #383fc3); /* Gradient from initial to final color */
+  transition: background-color 0.5s; 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -52,6 +53,93 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.profileButton{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  right: 0;
+  list-style-type: none;
+  margin: 10px;
+  position: fixed;
+  border-radius: 100%;
+  width: 70px;
+  height: 70px;
+  background-color: #7178ff;
+}
+
+.buttonContainer{
+  display: flex;
+  justify-content: space-between;
+  padding: 40px;
+  margin-top: 15px;
+}
+
+
+.directions {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.directionsTooltip {
+  display: none;
+  position: absolute;
+  margin: 15px;
+  color: white;
+  padding: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  width: 200px;
+}
+
+.directions:hover .directionsTooltip {
+  display: block;
+}
+
+.directionsButton{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  border-radius: 100%;
+  width: 70px;
+  height: 70px;
+  background-color: #7178ff;
+}
+
+
+
+.difficulty-menu{
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+}
+
+.diffLabel{
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+.menuButton{
+  margin-bottom: 15px;
+}
+
+.leaderboard{
+  align-items: center;
+  background-color: #646cffc0;
+  box-shadow: 0 0 10px rgb(255, 255, 255); /* Subtle box shadow */
+  border-radius: 10px;
+}
+
+.leaderboardList{
+  list-style-type: none;
+  text-align: center;
+  margin-right: 30px;
 }
 
 @media (prefers-color-scheme: light) {
