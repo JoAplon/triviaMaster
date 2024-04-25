@@ -1,0 +1,14 @@
+.profileButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    right: 0;
+    list-style-type: none;
+    margin: 10px;
+    position: fixed;
+    border-radius: 100%;
+    width: 70px;
+    height: 70px;
+    background-color: #7178ff;
+  }

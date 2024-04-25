@@ -2,7 +2,6 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #1a1a1a; /* Initial color */
@@ -55,95 +54,6 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-.profileButton{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 0;
-  right: 0;
-  list-style-type: none;
-  margin: 10px;
-  position: fixed;
-  border-radius: 100%;
-  width: 70px;
-  height: 70px;
-  background-color: #7178ff;
-}
-
-.buttonContainer{
-  display: flex;
-  justify-content: space-between;
-  padding: 40px;
-  margin-top: 15px;
-}
-
-
-.directions {
-  display: flex;
-  position: fixed;
-  top: 0;
-  left: 0;
-}
-
-.directionsButton{
-  display: flex;
-  justify-content: center;
-  z-index: 1;
-  align-items: center;
-  margin: 10px;
-  border-radius: 100%;
-  width: 70px;
-  height: 70px;
-  background-color: #7178ff;
-}
-
-.directionsTooltip {
-  display: none;
-  position: absolute;
-  top: 100%;
-  margin: 15px;
-  color: white;
-  padding: 10px;
-  border: 1px solid #cccccc;
-  border-radius: 5px;
-  width: 200px;
-}
-
-.directions:hover .directionsTooltip {
-  display: block;
-}
-
-
-
-
-.difficulty-menu{
-  border: 1px solid #cccccc;
-  border-radius: 5px;
-}
-
-.diffLabel{
-  display: flex;
-  justify-content: center;
-  padding: 5px;
-  margin-bottom: 5px;
-}
-
-.menuButton{
-  margin-bottom: 15px;
-}
-
-.leaderboard{
-  align-items: center;
-  background-color: #646cffc0;
-  box-shadow: 0 0 10px rgb(255, 255, 255); /* Subtle box shadow */
-  border-radius: 10px;
-}
-
-.leaderboardList{
-  list-style-type: none;
-  text-align: center;
-  margin-right: 30px;
-}
 
 @media (prefers-color-scheme: light) {
   :root {
