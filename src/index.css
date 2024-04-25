@@ -85,9 +85,22 @@ button:focus-visible {
   left: 0;
 }
 
+.directionsButton{
+  display: flex;
+  justify-content: center;
+  z-index: 1;
+  align-items: center;
+  margin: 10px;
+  border-radius: 100%;
+  width: 70px;
+  height: 70px;
+  background-color: #7178ff;
+}
+
 .directionsTooltip {
   display: none;
   position: absolute;
+  top: 100%;
   margin: 15px;
   color: white;
   padding: 10px;
@@ -100,16 +113,6 @@ button:focus-visible {
   display: block;
 }
 
-.directionsButton{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 10px;
-  border-radius: 100%;
-  width: 70px;
-  height: 70px;
-  background-color: #7178ff;
-}
 
 
 
