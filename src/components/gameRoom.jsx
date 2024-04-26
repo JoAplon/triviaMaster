@@ -1,47 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TriviaQuestion from './triviaQuestions';
 import SubmitAnswerButton from './submitAnswerButton';
 import Results from './result';
-import triviaData from '../mockData';
-import '../styles/gameRoom.css'
+import { getTriviaQuestions } from '../utils/triviaAPI'; // Correct import path
+import '../styles/gameRoom.css';
 
 const GameRoom = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState([]);
   const [showResults, setShowResults] = useState(false);
   const [score, setScore] = useState(0);
+  const [triviaData, setTriviaData] = useState([]);
 
+  useEffect(() => {
+    const fetchTrivia = async () => {
+      try {
+        const questions = await getTriviaQuestions(); // Fetch trivia questions
+        setTriviaData(questions); // Update state with fetched questions
+      } catch (error) {
+        console.error('Error fetching trivia questions:', error);
+        // Handle errors here (e.g., show an error message)
+      }
+    };
+
+    fetchTrivia(); // Call the function when component mounts
+  }, []);
 
   const handleAnswerSubmit = (selectedOption) => {
-    const correctAnswer = triviaData[currentQuestionIndex].correctAnswer;
+    const currentTriviaQuestion = triviaData[currentQuestionIndex];
+    if (!currentTriviaQuestion) {
+      // Handle the case where currentTriviaQuestion is undefined
+      return;
+    }
+    
+    const correctAnswer = currentTriviaQuestion.correctAnswer;
     const isCorrect = selectedOption === correctAnswer;
   
-    // Update user answers
-    const updatedAnswers = [...userAnswers, { question: triviaData[currentQuestionIndex].question, answer: selectedOption, isCorrect }];
+    const updatedAnswers = [...userAnswers, { question: currentTriviaQuestion.question, answer: selectedOption, isCorrect }];
     setUserAnswers(updatedAnswers);
   
-    // Update score if the answer is correct
     if (isCorrect) {
       setScore(score + 1);
     }
-    console.log('Is correct:', isCorrect);
-    console.log('Correct answer:', correctAnswer);
-    console.log('Selected option:', selectedOption);
-      
-    // Check if it's the last question to show results
+  
     if (currentQuestionIndex === triviaData.length - 1) {
       setShowResults(true);
-      console.log('Score:', score);
     } else {
-      // Move to the next question
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     }
   };  
 
   const handleOptionSelect = (selectedOption) => {
-    // Handle option selection logic here
     console.log('Selected Option:', selectedOption);
-    // You can add more logic here as needed
   };
 
   return (
@@ -54,8 +64,8 @@ const GameRoom = () => {
       ) : (
         <div>
           <TriviaQuestion
-            question={triviaData[currentQuestionIndex].question}
-            options={triviaData[currentQuestionIndex].options}
+            question={triviaData[currentQuestionIndex]?.question}
+            options={triviaData[currentQuestionIndex]?.options}
             onOptionSelect={handleOptionSelect}
           />
           <SubmitAnswerButton onSubmit={handleAnswerSubmit} />
@@ -63,6 +73,6 @@ const GameRoom = () => {
       )}
     </div>
   );
-}
+};
 
 export default GameRoom;
