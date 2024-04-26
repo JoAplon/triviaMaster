@@ -11,7 +11,7 @@ const GameRoom = () => {
   const [showResults, setShowResults] = useState(false);
   const [score, setScore] = useState(0);
   const [triviaData, setTriviaData] = useState([]);
-
+  const [selectedOption, setSelectedOption] = useState("")
   useEffect(() => {
     const fetchTrivia = async () => {
       try {
@@ -26,46 +26,51 @@ const GameRoom = () => {
     fetchTrivia(); // Call the function when component mounts
   }, []);
 
-  const handleAnswerSubmit = (selectedOption) => {
+  const handleAnswerSubmit = () => {
+    console.log(selectedOption);
     const currentTriviaQuestion = triviaData[currentQuestionIndex];
     if (!currentTriviaQuestion) {
       // Handle the case where currentTriviaQuestion is undefined
       return;
     }
-    
-    const correctAnswer = currentTriviaQuestion.correctAnswer;
+
+    const correctAnswer = currentTriviaQuestion.correct_answer;
+    console.log(currentTriviaQuestion);
     const isCorrect = selectedOption === correctAnswer;
-  
+    console.log(isCorrect);
+
     const updatedAnswers = [...userAnswers, { question: currentTriviaQuestion.question, answer: selectedOption, isCorrect }];
     setUserAnswers(updatedAnswers);
-  
+
+    // Update the score using the functional form of setScore
     if (isCorrect) {
-      setScore(score + 1);
+      setScore(prevScore => prevScore + 1);
     }
-  
+
     if (currentQuestionIndex === triviaData.length - 1) {
       setShowResults(true);
     } else {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     }
-  };  
+  };
 
-  const handleOptionSelect = (selectedOption) => {
-    console.log('Selected Option:', selectedOption);
+  const handleOptionSelect = (Option) => {
+    console.log('Selected Option:', Option);
+    setSelectedOption(Option)
   };
 
   return (
     <div className="GameRoom">
       {showResults ? (
         <Results
-          score={userAnswers.filter(answer => answer.isCorrect).length}
+          score={score} // Update to display the total score
           incorrectAnswers={userAnswers.filter(answer => !answer.isCorrect).map(answer => answer.question)}
         />
       ) : (
         <div>
           <TriviaQuestion
             question={triviaData[currentQuestionIndex]?.question}
-            options={triviaData[currentQuestionIndex]?.options}
+            options={triviaData[currentQuestionIndex]?.incorrect_answers.concat(triviaData[currentQuestionIndex]?.correct_answer)}
             onOptionSelect={handleOptionSelect}
           />
           <SubmitAnswerButton onSubmit={handleAnswerSubmit} />

@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const TriviaQuestion = ({ question, options = [], onOptionSelect }) => {
+  useEffect(() => {
+   console.log(options);
+  }, [options])
+  
   return (
     <div className="question">
       <h2>{question}</h2>
