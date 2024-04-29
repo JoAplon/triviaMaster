@@ -54,7 +54,7 @@ const Home = () => {
       <Header />
       <h1>Trivia Mind Meld</h1>
       <h2>The Best Trivia Game Around!</h2>
-      <Link to="/game-room">
+      <Link to="/mode-selection">
         <button>Enter Game Room</button>
       </Link>
       <div className='buttonContainer'>
@@ -63,7 +63,7 @@ const Home = () => {
       <button className='catButton' onClick={handleToggleCategoryMenu}>Category</button>
       </div>
       {showDifficultyMenu && <DifficultyMenu difficulties={['Easy', 'Medium', 'Hard']} onSelect={handleDifficultySelect} onClose={() => setShowDifficultyMenu(false)} />}
-      {showCategoryMenu && <CategoryMenu onClose={() => setShowCategoryMenu(False)} />}
+      {showCategoryMenu && <CategoryMenu onClose={() => setShowCategoryMenu(false)} />}
 
       <Leaderboard leaderboardData={leaderboardData} />
 

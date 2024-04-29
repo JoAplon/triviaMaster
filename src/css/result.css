@@ -1,0 +1,29 @@
+.container{
+    height: 100vh;
+}
+
+.incorrectAnswers{
+    margin-top: 40px;
+}
+
+.incorrectAnswersList{
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #cccccc;
+    padding: 10px;
+    background-color: #646cffc0;
+    box-shadow: 0 0 10px rgb(255, 255, 255); /* Subtle box shadow */
+    border-radius: 10px;
+}
+
+.incorrectAnswersList ul{
+    list-style-type: none;
+}
+
+.incorrectAnswersList li{
+    padding: 5px;
+}
+
+.playAgain{
+    margin: 25px;
+}
