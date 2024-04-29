@@ -1,5 +1,5 @@
 .profileContainer{
-    width: 100vh;
+    width: 80vh;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -8,6 +8,7 @@
 .pictureContainer{
     display: flex;
     align-items: center;
+    margin: 40px;
 }
 
 .basicUserInfo{

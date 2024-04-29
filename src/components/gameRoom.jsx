@@ -3,7 +3,8 @@ import TriviaQuestion from './triviaQuestions';
 import SubmitAnswerButton from './submitAnswerButton';
 import Results from './result';
 import triviaData from '../mockData';
-import '../styles/gameRoom.css'
+import '../styles/gameRoom.css';
+
 
 const GameRoom = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);

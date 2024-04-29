@@ -1,4 +1,3 @@
-// Home.jsx
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Tooltip from './tooltip'
@@ -10,17 +9,24 @@ const Header = () => {
     const location = useLocation();
     const [showTooltip, setShowTooltip] = useState(location.pathname === '/');
     const [showTooltipButton, setShowTooltipButton] = useState(location.pathname === '/');
+    const [showSettingsButton, setShowSettingsButton] = useState(location.pathname !== '/');
+    const [showSettingsMenu, setShowSettingsMenu] = useState(false);
     const [showProfileMenu, setShowProfileMenu] = useState(false);
     
     const toggleProfileMenu = () => {
         setShowProfileMenu(!showProfileMenu);
     };
 
+    const toggleSettingMenu = () => {
+        setShowSettingsMenu(!showSettingsMenu);
+    }
+
 
     useEffect(() => {
         // console.log('Current pathname:', location.pathname);
         setShowTooltip(location.pathname === '/');
         setShowTooltipButton(location.pathname === '/');
+        setShowSettingsButton(location.pathname !== '/')
     }, [location]);
 
     const ProfileMenu = () => {
@@ -72,6 +78,24 @@ const Header = () => {
                             </div>
                         )}
                     </li>
+
+                    {showSettingsButton && (
+                        <li className="settings">
+                            <div className='settingsContainer'>
+                            <button className="settingsButton" onClick={toggleSettingMenu}>
+                                    <img src='https://img.icons8.com/ios-filled/50/settings.png' alt="Settings" />
+                            </button>
+                            { showSettingsMenu && (
+                                <div className='settingsMenu'>
+                                    <button>Change Difficulty</button>
+                                    <button>Change Categories</button>
+                                    <button onClick={() => window.location.href = '/'}>Quit</button>
+                                </div>
+                            )}
+                            </div>
+                        </li>
+                    )}
+
                     <li className="profile">
                         <button className='profileButton'  onClick={toggleProfileMenu}>
                         <img src='https://img.icons8.com/wired/64/test-account.png'/>
