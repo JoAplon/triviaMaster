@@ -1,3 +1,5 @@
+//mockData.js
+
 const triviaData = [
     {
       id: 1,

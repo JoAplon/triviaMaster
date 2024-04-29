@@ -1,23 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 
-const TriviaQuestion = ({ question, options, onOptionSelect }) => {
-  const [selectedOption, setSelectedOption] = useState('');
-
-  const handleOptionSelect = (option) => {
-    setSelectedOption(option);
-    onOptionSelect(option);
-  };
+const TriviaQuestion = ({ question, options = [], onOptionSelect }) => {
+  useEffect(() => {
+   console.log(options);
+  }, [options])
   
   return (
-    <div className="TriviaQuestion">
+    <div className="question">
       <h2>{question}</h2>
       <div className="options">
         {options.map((option, index) => (
-          <button key={index} onClick={() => handleOptionSelect(option)}>{option}</button>
+          <button key={index} onClick={() => onOptionSelect(option)}>
+            {option}
+          </button>
         ))}
       </div>
     </div>
   );
-}
+};
 
 export default TriviaQuestion;
