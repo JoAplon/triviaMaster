@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axios from "../axiosconfig";
 import ProfilePictures from "./profilePics";
 import '../css/profile.css'
 // import tinyMouse from '../assets/tinyMouse.jpg'
@@ -16,34 +16,34 @@ const Profile = () => {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const response = await axios.get("api/");
+                const response = await axios.get("api/users/register");
                 setUserData(response.data);
             } catch (error) {
                 console.log('Error fetching user data.', error);
             }
         };
 
-        const fetchLeaderboardPosition = async () => {
-            try {
-                const response = await axios.get("api/");
-                setLeaderboardPosition(response.data.position);
-            } catch (error) {
-                console.log('Error fetching leaderboard position.');
-            }
-        };
+        // const fetchLeaderboardPosition = async () => {
+        //     try {
+        //         const response = await axios.get("api/");
+        //         setLeaderboardPosition(response.data.position);
+        //     } catch (error) {
+        //         console.log('Error fetching leaderboard position.');
+        //     }
+        // };
 
-        const fetchSavedCategories = async () => {
-            try {
-                const response = await axios.get("api/");
-                setSavedCategories(response.data);
-            } catch (error) {
-                console.log('Error fetching saved categories');
-            }
-        };
+        // const fetchSavedCategories = async () => {
+        //     try {
+        //         const response = await axios.get("api/");
+        //         setSavedCategories(response.data);
+        //     } catch (error) {
+        //         console.log('Error fetching saved categories');
+        //     }
+        // };
 
         fetchUserData();
-        fetchLeaderboardPosition();
-        fetchSavedCategories();
+        // fetchLeaderboardPosition();
+        // fetchSavedCategories();
     }, []);
 
     const profilePictures = {
@@ -73,7 +73,7 @@ const Profile = () => {
 
     return (
         <div className="profileContainer">
-            <h2>Your Profile!</h2>
+            <h2>Welcome to Your Profile, {userData && userData.username}!</h2>
 
             <div className="pictureContainer">
             <div className="profile-picture">
