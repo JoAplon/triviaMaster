@@ -5,6 +5,7 @@ import Tooltip from './tooltip'
 import '../css/header.css'
 
 
+
 const Header = () => {
     const location = useLocation();
     const [showTooltip, setShowTooltip] = useState(location.pathname === '/');
@@ -26,12 +27,26 @@ const Header = () => {
         return (
             <div className="profileMenu">
                 <ul>
+                {location.pathname !== '/profile' && ( 
+                        <li>
+                            <Link to="/profile">Profile</Link>
+                        </li>
+                )}
+                {location.pathname !== '/login' && (
                     <li>
                         <Link to="/login">Login</Link>
                     </li>
+                )}
+                {location.pathname !== '/signup' && (
                     <li>
                         <Link to="/signup">Sign Up</Link>
                     </li>
+                )}
+                { location.pathname !== '/' && (
+                    <li>
+                        <Link to={"/"}>Home</Link>
+                    </li>
+                )}
                 </ul>
             </div>
         );
@@ -62,6 +77,7 @@ const Header = () => {
                         <img src='https://img.icons8.com/wired/64/test-account.png'/>
                         </button>
                         {showProfileMenu && <ProfileMenu />}
+                         
                     </li>
 
                 </ul>

@@ -4,6 +4,9 @@ import './App.css';
 import Header from '../src/components/header'
 import Home from '../src/components/homepage';
 import GameRoom from '../src/components/gameRoom';
+import Login from './components/loginPage';
+import Signup from './components/signupPage';
+import Profile from '../src/components/profilepage'
 
 
 function App() {
@@ -17,6 +20,10 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/game-room/*" element={<GameRoom />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/profile" element={<Profile />} />
+
           </Routes>
         </main>
       </div>
