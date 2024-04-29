@@ -12,6 +12,8 @@ const GameRoom = () => {
   const [score, setScore] = useState(0);
   const [triviaData, setTriviaData] = useState([]);
   const [selectedOption, setSelectedOption] = useState("")
+
+  
   useEffect(() => {
     const fetchTrivia = async () => {
       try {

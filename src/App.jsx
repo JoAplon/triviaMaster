@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from './axiosconfig'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Header from '../src/components/header'
