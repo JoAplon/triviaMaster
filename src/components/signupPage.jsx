@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import '../css/signupPage.css';
 import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
@@ -11,8 +12,17 @@ const Signup = () => {
 
     const handleSignup = async (e) => {
         e.preventDefault();
+        const formData = new FormData();
+        formData.append('username', username);
+        formData.append('email', email);
+        formData.append('password', password);
+
         try {
-            const response = await axios.post('/api/users/register', { username, email, password });
+            const response = await axios.post('/api/users/register', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
             const { token } = response.data;
             localStorage.setItem('token', token);
             navigate('/');
@@ -24,23 +34,28 @@ const Signup = () => {
 
     return (
         <div className="signup-container">
-            <h2>Signup</h2>
-            {error && <div className="error">{error}</div>}
-            <form onSubmit={handleSignup}>
-                <div>
-                    <label>Username:</label>
-                    <input type="username" value={username} onChange={(e) => setUsername(e.target.value)} required />
-                </div>
-                <div>
-                    <label>Email:</label>
-                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-                </div>
-                <div>
-                    <label>Password:</label>
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-                </div>
-                <button type="submit">Signup!</button>
-            </form>
+            <div className="signup-form">
+                <h2>Signup</h2>
+                {error && <div className="error">{error}</div>}
+                <form onSubmit={handleSignup}>
+                    <div>
+                        <label>Username:</label>
+                        <input type="username" value={username} onChange={(e) => setUsername(e.target.value)} required />
+                    </div>
+                    <div>
+                        <label>Email:</label>
+                        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                    </div>
+                    <div>
+                        <label>Password:</label>
+                        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                    </div>
+                    <button type="submit">Signup!</button>
+                </form>
+            </div>
+            <div className="signup-image">
+                <img src="/Screenshot 2024-04-29 at 12.44.16 PM.png" alt="Signup Visual" style={{ maxWidth: '500px', maxHeight: 'auto' }} />
+            </div>
         </div>
     );
 };

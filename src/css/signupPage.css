@@ -1,0 +1,94 @@
+/* Basic Reset and Font Import */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+/* Container Styling */
+.signup-container {
+    display: flex;
+    align-items: center; /* Center items vertically */
+    justify-content: center; /* Center items horizontally */
+    min-height: 100vh;
+    padding: 20px;
+    /* background-color: #3d3d3e;  */
+}
+
+/* Form Container */
+.signup-form {
+    flex: 1; /* Allows the form to grow and take space as needed */
+    max-width: 320px; /* Maximum width of the form */
+    margin-right: 50px; /* Space between form and image */
+}
+
+form {
+    padding: 20px;
+    /* background: #ffffff; White background for the form */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Labels and Inputs */
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #ffffff;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Button Styling */
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF; /* Primary button color */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+/* Image Container */
+.signup-image {
+    flex: 1; /* Allows the image to grow and take space as needed */
+    max-width: 500px; /* Maximum width of the image */
+}
+
+.signup-image img {
+    width: 100%;
+    height: auto;
+}
+
+/* Error Message Styling */
+.error {
+    color: #ff0000;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Responsiveness */
+@media (max-width: 960px) {
+    .signup-container {
+        flex-direction: column; /* Stack vertically on smaller screens */
+    }
+    .signup-form, .signup-image {
+        max-width: 100%;
+        margin-right: 0; /* Remove margin in vertical stacking */
+    }
+}
