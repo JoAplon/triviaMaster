@@ -1,11 +1,10 @@
 import React from 'react';
 import '../css/result.css';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 const Results = ({ score, incorrectAnswers, difficulty, categories }) => {
 
-  const history = useHistory();
 
   const handlePlayAgain = () => {
     history.push({
