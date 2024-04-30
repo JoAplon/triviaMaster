@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import '../css/difficulty.css';
+import { GlobalData } from "../context/GlobalContext";
 
 const DifficultyMenu = ({ difficulties, onSelect, onClose }) => {
-    const [selectedDifficulty, setSelectedDifficulty] = useState(null);
+    const {selectedDifficulty, setSelectedDifficulty} = useContext(GlobalData);
+
+    // const [selectedDifficulty, setSelectedDifficulty] = useState(null);
 
     const handleRadioChange = (difficulty) => {
         setSelectedDifficulty(difficulty);
@@ -12,6 +15,7 @@ const DifficultyMenu = ({ difficulties, onSelect, onClose }) => {
         // do something with selected mode
         if (selectedDifficulty) {
             onSelect(selectedDifficulty)
+            console.log('Selected difficulty:', selectedDifficulty);
             onClose();
         }
     };

@@ -3,12 +3,21 @@ export const GlobalData = createContext()
 
 export default function GlobalContext({ children }) {
     const [selectedCategory, setSelectedCategory] = useState([])
+    const [ selectedDifficulty, setSelectedDifficulty] = useState([])
+
     const handleSelectedCategory = (category) => {
       setSelectedCategory(category)
-    } 
+    };
+
+    const handleSelectedDifficulty = (difficulty) => {
+      setSelectedDifficulty(difficulty)
+    };
+
     const data = {
         selectedCategory,
-        setSelectedCategory
+        setSelectedCategory,
+        selectedDifficulty,
+        setSelectedDifficulty
     }
   return <GlobalData.Provider value={data}> { children } </GlobalData.Provider>
 }

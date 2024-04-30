@@ -6,8 +6,9 @@ import { getTriviaQuestions } from '../utils/triviaAPI'; // Correct import path
 import '../styles/gameRoom.css';
 import { GlobalData } from '../context/GlobalContext';
 
-const GameRoom = ({selectedDifficulty}) => {
+const GameRoom = () => {
   const {selectedCategory, setSelectedCategory} = useContext(GlobalData);
+      const {selectedDifficulty, setSelectedDifficulty} = useContext(GlobalData);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState([]);
   const [showResults, setShowResults] = useState(false);

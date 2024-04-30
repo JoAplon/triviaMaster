@@ -9,7 +9,8 @@ import axios from '../axiosconfig';
 import { GlobalData } from '../context/GlobalContext';
 
 const Home = () => {
-  const {selectedCategory, setSelectedCategory} = useContext(GlobalData)
+  const {selectedCategory, setSelectedCategory} = useContext(GlobalData);
+  const {selectedDifficulty, setSelectedDifficulty} = useContext(GlobalData);
   const [showDifficultyMenu, setShowDifficultyMenu] = useState(false);
   const [showCategoryMenu, setShowCategoryMenu] = useState(false);
 
@@ -27,7 +28,7 @@ const Home = () => {
   
 
   // const [selectedCategory, setSelectedCategory] = useState(null);
-  const [selectedDifficulty, setSelectedDifficulty] = useState(null);
+  // const [selectedDifficulty, setSelectedDifficulty] = useState(null);
   
 
   const handleToggleCategoryMenu = () => {
@@ -76,7 +77,7 @@ const Home = () => {
         <button className='diffButton' onClick={handleToggleDifficultyMenu}>Difficulty</button>
         <button className='catButton' onClick={handleToggleCategoryMenu}>Category</button>
       </div>
-      {showDifficultyMenu && <DifficultyMenu difficulties={['Easy', 'Medium', 'Hard']} onSelect={handleDifficultySelect} onClose={() => setShowDifficultyMenu(false)} />}
+      {showDifficultyMenu && <DifficultyMenu difficulties={['easy', 'medium', 'hard']} onSelect={handleDifficultySelect} onClose={() => setShowDifficultyMenu(false)} />}
       {showCategoryMenu && <CategoryMenu onSelect={handleCategorySelect} onClose={() => setShowCategoryMenu(false)} />}
 
       <Leaderboard leaderboardData={leaderboardData} />
