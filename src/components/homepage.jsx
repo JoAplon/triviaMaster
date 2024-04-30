@@ -1,31 +1,17 @@
-// Home.jsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Header from './header';
 import DifficultyMenu from './difficultyMenu';
 import CategoryMenu from './categoryMenu';
 import Leaderboard from './leaderboard';
-
+import GameRoom from '../components/gameRoom';
+import axios from '../axiosconfig';
+import { GlobalData } from '../context/GlobalContext';
 
 const Home = () => {
-
+  const {selectedCategory, setSelectedCategory} = useContext(GlobalData)
   const [showDifficultyMenu, setShowDifficultyMenu] = useState(false);
-
   const [showCategoryMenu, setShowCategoryMenu] = useState(false);
-
-  const handleToggleCategoryMenu = () => {
-    setShowCategoryMenu(!showCategoryMenu);
-  };
-
-  const handleToggleDifficultyMenu = () => {
-    console.log("Toggling difficulty menu...");
-    setShowDifficultyMenu(!showDifficultyMenu);
-  };
-
-  const handleDifficultySelect = (difficulty) => {
-    console.log('Selected difficulty:', difficulty);
-    // Handle the selection logic here
-};
 
 
   const [leaderboardData, setLeaderboardData] = useState([
@@ -34,6 +20,34 @@ const Home = () => {
     { name: 'Player 3', score: 80 },
     // Add more players as needed
   ]);
+
+  useEffect(() => {
+  console.log(selectedCategory)
+  }, [selectedCategory])
+  
+
+  // const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedDifficulty, setSelectedDifficulty] = useState(null);
+  
+
+  const handleToggleCategoryMenu = () => {
+    setShowCategoryMenu(!showCategoryMenu);
+  };
+
+  const handleToggleDifficultyMenu = () => {
+    // console.log("Toggling difficulty menu...");
+    setShowDifficultyMenu(!showDifficultyMenu);
+  };
+
+  const handleDifficultySelect = (difficulty) => {
+    setSelectedDifficulty(difficulty);
+    localStorage.setItem('selectedDifficulty', difficulty); // Save to local storage
+  };
+
+  const handleCategorySelect = (category) => {
+    setSelectedCategory(category);
+    localStorage.setItem('selectedCategory', category); // Save to local storage
+  };
 
   useEffect(() => {
     // Simulate leaderboard data update
@@ -59,14 +73,15 @@ const Home = () => {
       </Link>
       <div className='buttonContainer'>
 
-      <button className='diffButton' onClick={handleToggleDifficultyMenu}>Difficulty</button>
-      <button className='catButton' onClick={handleToggleCategoryMenu}>Category</button>
+        <button className='diffButton' onClick={handleToggleDifficultyMenu}>Difficulty</button>
+        <button className='catButton' onClick={handleToggleCategoryMenu}>Category</button>
       </div>
       {showDifficultyMenu && <DifficultyMenu difficulties={['Easy', 'Medium', 'Hard']} onSelect={handleDifficultySelect} onClose={() => setShowDifficultyMenu(false)} />}
-      {showCategoryMenu && <CategoryMenu onClose={() => setShowCategoryMenu(false)} />}
+      {showCategoryMenu && <CategoryMenu onSelect={handleCategorySelect} onClose={() => setShowCategoryMenu(false)} />}
 
       <Leaderboard leaderboardData={leaderboardData} />
-
+      {/* {selectedCategory && selectedDifficulty && <GameRoom selectedCategory={selectedCategory} selectedDifficulty={selectedDifficulty} />} */}
+      
     </div>
 
 

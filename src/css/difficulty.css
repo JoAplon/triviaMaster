@@ -1,22 +1,26 @@
-.buttonContainer{
+.buttonContainer {
   display: flex;
   justify-content: space-between;
   padding: 40px;
   margin-top: 15px;
 }
 
-.difficulty-menu{
-    border: 1px solid #cccccc;
-    border-radius: 5px;
-  }
-  
-  .diffLabel{
-    display: flex;
-    justify-content: center;
-    padding: 5px;
-    margin-bottom: 5px;
-  }
+.difficulty-menu {
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+}
 
-  .menuButton{
-    margin-bottom: 15px;
-  }
+.diffLabel {
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+.diffLabel input{
+  width: 50px;
+}
+
+.menuButton {
+  /* margin-bottom: 15px; */
+}
