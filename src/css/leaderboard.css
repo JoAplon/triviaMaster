@@ -3,10 +3,12 @@
     background-color: #646cffc0;
     box-shadow: 0 0 10px rgb(255, 255, 255); /* Subtle box shadow */
     border-radius: 10px;
+    margin-top: 30px;
   }
   
   .leaderboardList{
     list-style-type: none;
     text-align: center;
     margin-right: 30px;
+    padding: 15px;
   }

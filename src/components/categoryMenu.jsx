@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { getTriviaCategories } from '../utils/triviaAPI';
+import { GlobalData } from '../context/GlobalContext';
+
 
 const CategoryMenu = ({ onClose }) => {
+  const {selectedCategory, setSelectedCategory} = useContext(GlobalData);
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     // Fetch categories from API
     const fetchCategories = async () => {
       try {
-        const response = await fetch('API_ENDPOINT/categories');
-        const data = await response.json();
-        setCategories(data.categories); // Assuming the API response contains an array of category objects
+        const triviaCategories = await getTriviaCategories();
+        setCategories(triviaCategories); 
       } catch (error) {
         console.error('Error fetching categories:', error);
       }
@@ -18,19 +21,20 @@ const CategoryMenu = ({ onClose }) => {
     fetchCategories();
   }, []); // Empty dependency array to run only once on component mount
 
-  const [selectedCategories, setSelectedCategories] = useState([]);
+  // const [selectedCategory, setSelectedCategory] = useState([]);
 
+  // adds the category to the array when selected and removes when selected again
   const handleCategoryChange = (category) => {
-    if (selectedCategories.includes(category)) {
-      setSelectedCategories(selectedCategories.filter((selectedCategory) => selectedCategory !== category));
+    if (selectedCategory?.includes(category)) {
+      setSelectedCategory(selectedCategory.filter((element) => element !== category));
     } else {
-      setSelectedCategories([...selectedCategories, category]);
+      setSelectedCategory([...selectedCategory, category]);
     }
   };
 
   const handleDone = () => {
-    // Handle the selected categories (e.g., pass them to another component or store them in state)
-    console.log('Selected categories:', selectedCategories);
+    // closes the category menu and console.logs the selections
+    console.log('Selected categories:', selectedCategory);
     onClose();
   };
 
@@ -41,7 +45,7 @@ const CategoryMenu = ({ onClose }) => {
         <label key={category.id}>
           <input
             type="checkbox"
-            checked={selectedCategories.includes(category.id)}
+            checked={selectedCategory?.includes(category.id)}
             onChange={() => handleCategoryChange(category.id)}
           />
           {category.name}

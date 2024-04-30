@@ -8,43 +8,74 @@ import '../css/profile.css'
 const Profile = () => {
     const [userData, setUserData] = useState(null);
     const [showInfo, setShowInfo] = useState(false);
-    const [leaderboarPosition, setLeaderboardPosition] = useState(null);
+    const [leaderboardPosition, setLeaderboardPosition] = useState(null);
     const [savedCategories, setSavedCategories] = useState(null);
     const [selectedPicture, setSelectedPicture] = useState(null);
     const [showPopup, setShowPopup] = useState(false);
 
+    const [gameId, setGameId] = useState(null);
+
+    useEffect(() => {
+        const startNewGame = async () => {
+            try {
+                const token = localStorage.getItem('token'); 
+                const headers = {
+                    'Authorization': `Bearer ${token}`
+                };
+                const userDataResponse = await axios.get("api/users/me", { headers });
+                const userId = userDataResponse.data.userId;
+
+                const response = await axios.post('/api/game/start', { userId, categories: savedCategories }, { headers });
+                setGameId(response.data.gameId);
+            } catch (error) {
+                console.error('Error starting a new game:', error);
+            }
+        };
+
+        startNewGame();
+    }, []);
+
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const response = await axios.get("api/users/register");
+                const token = localStorage.getItem('token'); 
+                const headers = {
+                    'Authorization': `Bearer ${token}`
+                };
+                const response = await axios.get("api/users/me", { headers });
                 setUserData(response.data);
             } catch (error) {
                 console.log('Error fetching user data.', error);
             }
         };
 
-        // const fetchLeaderboardPosition = async () => {
-        //     try {
-        //         const response = await axios.get("api/");
-        //         setLeaderboardPosition(response.data.position);
-        //     } catch (error) {
-        //         console.log('Error fetching leaderboard position.');
-        //     }
-        // };
+        const fetchLeaderboardPosition = async (difficulty) => {
+            try {
+                const response = await axios.get(`api/leaderboard/${difficulty}`);
+                setLeaderboardPosition(response.data.position);
+            } catch (error) {
+                console.log('Error fetching leaderboard position.');
+            }
+        };
 
-        // const fetchSavedCategories = async () => {
-        //     try {
-        //         const response = await axios.get("api/");
-        //         setSavedCategories(response.data);
-        //     } catch (error) {
-        //         console.log('Error fetching saved categories');
-        //     }
-        // };
+        const fetchSavedCategories = async () => {
+            try {
+                const response = await axios.get("api/categories");
+                setSavedCategories(response.data);
+            } catch (error) {
+                console.log('Error fetching saved categories');
+            }
+        };
 
         fetchUserData();
-        // fetchLeaderboardPosition();
-        // fetchSavedCategories();
+        fetchLeaderboardPosition("easy");
+        fetchLeaderboardPosition("medium");
+        fetchLeaderboardPosition("hard");
+       fetchSavedCategories();
     }, []);
+
+
+    
 
     const profilePictures = {
         tinyMouse: '../assets/tinyMouse.jpg',
@@ -112,13 +143,25 @@ const Profile = () => {
             <div className="leaderboardCategory">
             <div className="leaderboardDisplay">
                 <p>Here you are on the Leaderboard!</p> <br/>
-                <p>#9 1200 points!</p>
+                {leaderboardPosition && (
+                        <ul>
+                            <li>Easy: {leaderboardPosition.easy}</li>
+                            <li>Medium: {leaderboardPosition.medium}</li>
+                            <li>Hard: {leaderboardPosition.hard}</li>
+                        </ul>
+                    )}
             </div>
+            </div>
+
             <div className="categoryDisplay">
                 <p>These are your favorite categories! </p> <br/>
-                <p>Movies</p>
-                <p>Sports</p>
-            </div>
+                {savedCategories && (
+                    <ul>
+                        {savedCategories.map((category, index) => (
+                            <li key={index}>{category}</li>
+                        ))}
+                    </ul>
+                )}
             </div>
         </div>
     );

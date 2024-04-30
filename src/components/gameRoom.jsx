@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import TriviaQuestion from './triviaQuestions';
 import SubmitAnswerButton from './submitAnswerButton';
 import Results from './result';
 import { getTriviaQuestions } from '../utils/triviaAPI'; // Correct import path
 import '../styles/gameRoom.css';
+import { GlobalData } from '../context/GlobalContext';
 
-const GameRoom = () => {
+const GameRoom = ({selectedDifficulty}) => {
+  const {selectedCategory, setSelectedCategory} = useContext(GlobalData);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState([]);
   const [showResults, setShowResults] = useState(false);
@@ -13,20 +15,27 @@ const GameRoom = () => {
   const [triviaData, setTriviaData] = useState([]);
   const [selectedOption, setSelectedOption] = useState("")
 
-  
+useEffect(() => {
+  console.log('Selected Category: ', selectedCategory);
+}, [selectedCategory])
+
+
   useEffect(() => {
+    console.log('Selected Difficulty:', selectedDifficulty);
     const fetchTrivia = async () => {
       try {
-        const questions = await getTriviaQuestions(); // Fetch trivia questions
+
+        const questions = await getTriviaQuestions(10, selectedCategory[0], selectedDifficulty); // Fetch trivia questions
         setTriviaData(questions); // Update state with fetched questions
+
       } catch (error) {
         console.error('Error fetching trivia questions:', error);
-        // Handle errors here (e.g., show an error message)
       }
     };
 
     fetchTrivia(); // Call the function when component mounts
-  }, []);
+  }, [ selectedCategory, selectedDifficulty ]);
+
 
   const handleAnswerSubmit = () => {
     console.log(selectedOption);
@@ -60,6 +69,8 @@ const GameRoom = () => {
     console.log('Selected Option:', Option);
     setSelectedOption(Option)
   };
+
+
 
   return (
     <div className="GameRoom">
