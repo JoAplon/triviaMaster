@@ -1,0 +1,90 @@
+.profileButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    right: 0;
+    list-style-type: none;
+    margin: 10px;
+    position: fixed;
+    border-radius: 100%;
+    width: 70px;
+    height: 70px;
+    background-color: #7178ff;
+    z-index: 1;
+  }
+
+  .profileMenu{
+    list-style-type: none;
+    position:absolute;
+    /* background-color: #1a1a1a; */
+    /* display: flex; */
+    /* justify-content: end; */
+    /* top: calc(20% -10px); */
+    top: 30px;
+    right: 10px;
+    width: 200px;
+    /* padding: 5px; */
+    /* margin: 43px; */
+    padding-right: 100px;
+
+}
+
+  ul{
+    list-style-type: none;
+  }
+  
+  li{
+    margin-right: 10px;
+  }
+
+  .profileMenu ul li a:hover{
+    color: #03030898;
+  }
+
+  .settingsContainer, .settingsButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    list-style-type: none;
+    margin: 10px;
+    position: fixed;
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+    background-color: #7178ff;
+    z-index: 1;
+  }
+
+  .settingsMenu{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 100%;
+    margin: 15px;
+    margin-left: 140px;
+    color: white;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    width: 150px;
+  }
+
+.settingsMenu button{
+  margin: 10px;
+}
+
+/* 
+  @media screen and (max-width: 768px) {
+    .settingsMenu {
+        display: flex;
+        flex-direction: row;
+        position: absolute;
+        top: 100%;
+        left: 100%;
+    }
+} */

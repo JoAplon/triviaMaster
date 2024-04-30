@@ -1,0 +1,34 @@
+.waitingRoomContainer{
+    height: 100vh;
+    /* width: 100vh; */
+}
+
+.roomContainer{
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #646cffc0;
+    margin: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.roomContainer button{
+    max-height: 40px;
+    right: 0;
+}
+
+
+
+
+.roomContainer .room h3{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.room, .roomActions{
+    margin: 20px;
+}
