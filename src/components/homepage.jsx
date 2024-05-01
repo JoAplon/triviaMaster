@@ -4,6 +4,7 @@ import Header from './header';
 import DifficultyMenu from './difficultyMenu';
 import CategoryMenu from './categoryMenu';
 import Leaderboard from './leaderboard';
+import '../css/homepage.css'
 import GameRoom from '../components/gameRoom';
 import axios from '../axiosconfig';
 import { GlobalData } from '../context/GlobalContext';
@@ -70,7 +71,7 @@ const Home = () => {
       <h1>Trivia Mind Meld</h1>
       <h2>The Best Trivia Game Around!</h2>
       <Link to="/mode-selection">
-        <button>Enter Game Room</button>
+        <button className='gameButton'>Enter Game Room</button>
       </Link>
       <div className='buttonContainer'>
 

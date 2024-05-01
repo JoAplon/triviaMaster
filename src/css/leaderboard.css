@@ -1,7 +1,7 @@
 .leaderboard{
     align-items: center;
     background-color: #646cffc0;
-    box-shadow: 0 0 10px rgb(255, 255, 255); /* Subtle box shadow */
+    box-shadow: 0 0 10px rgb(255, 255, 255); 
     border-radius: 10px;
     margin-top: 30px;
   }

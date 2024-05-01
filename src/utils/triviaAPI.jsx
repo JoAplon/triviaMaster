@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const getTriviaQuestions = async (amount = 10, selectedCategory, selectedDifficulty, type = 'multiple') => {
   try {
-    const response = await axios.get(`https://opentdb.com/api.php?amount=${amount}&category=${selectedCategory}&difficulty=${selectedDifficulty}&type=${type}`);
+    const response = await axios.get(`https://opentdb.com/api.php?amount=${amount}&category=${selectedCategory}&difficulty=${selectedDifficulty}&type=${type}&encode=url3986`);
     console.log (response.data)
     return response.data.results;
   } catch (error) {

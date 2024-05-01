@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "../axiosconfig";
 import ProfilePictures from "./profilePics";
 import '../css/profile.css'
-// import tinyMouse from '../assets/tinyMouse.jpg'
+import tinyMouse from '../assets/tinyMouse.jpg'
 
 
 const Profile = () => {
@@ -15,78 +15,78 @@ const Profile = () => {
 
     const [gameId, setGameId] = useState(null);
 
-    useEffect(() => {
-        const startNewGame = async () => {
-            try {
-                const token = localStorage.getItem('token'); 
-                const headers = {
-                    'Authorization': `Bearer ${token}`
-                };
-                const userDataResponse = await axios.get("api/users/me", { headers });
-                const userId = userDataResponse.data.userId;
+    // useEffect(() => {
+    //     const startNewGame = async () => {
+    //         try {
+    //             const token = localStorage.getItem('token'); 
+    //             const headers = {
+    //                 'Authorization': `Bearer ${token}`
+    //             };
+    //             const userDataResponse = await axios.get("api/users/me", { headers });
+    //             const userId = userDataResponse.data.userId;
 
-                const response = await axios.post('/api/game/start', { userId, categories: savedCategories }, { headers });
-                setGameId(response.data.gameId);
-            } catch (error) {
-                console.error('Error starting a new game:', error);
-            }
-        };
+    //             const response = await axios.post('/api/game/start', { userId, categories: savedCategories }, { headers });
+    //             setGameId(response.data.gameId);
+    //         } catch (error) {
+    //             console.error('Error starting a new game:', error);
+    //         }
+    //     };
 
-        startNewGame();
-    }, []);
+    //     startNewGame();
+    // }, []);
 
-    useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const token = localStorage.getItem('token'); 
-                const headers = {
-                    'Authorization': `Bearer ${token}`
-                };
-                const response = await axios.get("api/users/me", { headers });
-                setUserData(response.data);
-            } catch (error) {
-                console.log('Error fetching user data.', error);
-            }
-        };
+    // useEffect(() => {
+    //     const fetchUserData = async () => {
+    //         try {
+    //             const token = localStorage.getItem('token'); 
+    //             const headers = {
+    //                 'Authorization': `Bearer ${token}`
+    //             };
+    //             const response = await axios.get("api/users/me", { headers });
+    //             setUserData(response.data);
+    //         } catch (error) {
+    //             console.log('Error fetching user data.', error);
+    //         }
+    //     };
 
-        const fetchLeaderboardPosition = async (difficulty) => {
-            try {
-                const response = await axios.get(`api/leaderboard/${difficulty}`);
-                setLeaderboardPosition(response.data.position);
-            } catch (error) {
-                console.log('Error fetching leaderboard position.');
-            }
-        };
+    //     const fetchLeaderboardPosition = async (difficulty) => {
+    //         try {
+    //             const response = await axios.get(`api/leaderboard/${difficulty}`);
+    //             setLeaderboardPosition(response.data.position);
+    //         } catch (error) {
+    //             console.log('Error fetching leaderboard position.');
+    //         }
+    //     };
 
-        const fetchSavedCategories = async () => {
-            try {
-                const response = await axios.get("api/categories");
-                setSavedCategories(response.data);
-            } catch (error) {
-                console.log('Error fetching saved categories');
-            }
-        };
+    //     const fetchSavedCategories = async () => {
+    //         try {
+    //             const response = await axios.get("api/categories");
+    //             setSavedCategories(response.data);
+    //         } catch (error) {
+    //             console.log('Error fetching saved categories');
+    //         }
+    //     };
 
-        fetchUserData();
-        fetchLeaderboardPosition("easy");
-        fetchLeaderboardPosition("medium");
-        fetchLeaderboardPosition("hard");
-       fetchSavedCategories();
-    }, []);
+    //     fetchUserData();
+    //     fetchLeaderboardPosition("easy");
+    //     fetchLeaderboardPosition("medium");
+    //     fetchLeaderboardPosition("hard");
+    //    fetchSavedCategories();
+    // }, []);
 
 
     
 
     const profilePictures = {
-        tinyMouse: '../assets/tinyMouse.jpg',
-        snakeInSweater: '../assets/snake-in-sweater.jpg',
-        breadCat: '../assets/bread-cat.webp',
-        catWithKnife: '../assets/catwkmife.jpg',
-        cowboyCat: '../assets/catz.jpg',
-        ryanGosling: '../assets/doubt.jpg',
-        ronLikesVeggies: '../assets/ron-likes-veggies.jpg',
-        ronSmiling: '../assets/ron-smiling.jpg',
-        ronSwanson: '../assets/ron-swanson.jpg',
+        tinyMouse: '/assets/tinyMouse.jpg',
+        snakeInSweater: '/assets/snake-in-sweater.jpg',
+        breadCat: '/assets/bread-cat.webp',
+        catWithKnife: '/assets/catwkmife.jpg',
+        cowboyCat: '/assets/catz.jpg',
+        ryanGosling: '/assets/doubt.jpg',
+        ronLikesVeggies: '/assets/ron-likes-veggies.jpg',
+        ronSmiling: '/assets/ron-smiling.jpg',
+        ronSwanson: '/assets/ron-swanson.jpg',
     };
 
     const handlePictureSelect = (picture) => {
@@ -108,16 +108,17 @@ const Profile = () => {
 
             <div className="pictureContainer">
             <div className="profile-picture">
-                <img src={selectedPicture || "tinyMouse.jpg"} alt="Profile" />
+                <img src='../assets/bread-cat.webp' alt="Profile" />
                 <button onClick={() => setShowPopup(true)}>Change Picture</button>
             </div>
             {showPopup && (
                 <div className="popup-menu">
                     <h3>Select Profile Picture: </h3>
-                    <ProfilePictures
-                        pictures={Object.keys(profilePictures)}
-                        onSelectPicture={handlePictureSelect}
-                    />
+                    {Object.keys(profilePictures).map((pictureKey) => (
+                            <button key={pictureKey} onClick={() => handlePictureSelect(profilePictures[pictureKey])}>
+                                {pictureKey}
+                            </button>
+                        ))}
                     <button onClick={handleSavedPictures}>Save</button>
                 </div>
             )}
