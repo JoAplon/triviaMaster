@@ -7,8 +7,8 @@ import '../styles/gameRoom.css';
 import { GlobalData } from '../context/GlobalContext';
 
 const GameRoom = () => {
-  const {selectedCategory, setSelectedCategory} = useContext(GlobalData);
-      const {selectedDifficulty, setSelectedDifficulty} = useContext(GlobalData);
+  const { selectedCategory, setSelectedCategory } = useContext(GlobalData);
+  const { selectedDifficulty, setSelectedDifficulty } = useContext(GlobalData);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState([]);
   const [showResults, setShowResults] = useState(false);
@@ -16,9 +16,9 @@ const GameRoom = () => {
   const [triviaData, setTriviaData] = useState([]);
   const [selectedOption, setSelectedOption] = useState("")
 
-useEffect(() => {
-  console.log('Selected Category: ', selectedCategory);
-}, [selectedCategory])
+  useEffect(() => {
+    console.log('Selected Category: ', selectedCategory);
+  }, [selectedCategory])
 
 
   useEffect(() => {
@@ -26,16 +26,27 @@ useEffect(() => {
     const fetchTrivia = async () => {
       try {
 
-        const questions = await getTriviaQuestions(10, selectedCategory[0], selectedDifficulty); // Fetch trivia questions
-        setTriviaData(questions); // Update state with fetched questions
-
+        const questions = await getTriviaQuestions(10, selectedCategory, selectedDifficulty); // Fetch trivia questions
+        const decodedQuestions = questions.map(question => {
+          // Decode the question text and return the decoded object
+          const decodedQuestion = decodeURIComponent(question.question);
+          const decodedChoices = question.incorrect_answers.map(choice => decodeURIComponent(choice));
+          const decodedCorrectAnswer = decodeURIComponent(question.correct_answer);
+          return {
+            ...question,
+            question: decodedQuestion,
+            incorrect_answers: decodedChoices,
+            correct_answer: decodedCorrectAnswer
+          };
+        });
+        setTriviaData(decodedQuestions);
       } catch (error) {
         console.error('Error fetching trivia questions:', error);
       }
     };
 
     fetchTrivia(); // Call the function when component mounts
-  }, [ selectedCategory, selectedDifficulty ]);
+  }, [selectedCategory, selectedDifficulty]);
 
 
   const handleAnswerSubmit = () => {
@@ -70,7 +81,6 @@ useEffect(() => {
     console.log('Selected Option:', Option);
     setSelectedOption(Option)
   };
-
 
 
   return (

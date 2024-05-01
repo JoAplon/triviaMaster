@@ -2,8 +2,12 @@
     height: 100vh;
 }
 
-.incorrectAnswers{
-    margin-top: 40px;
+.incorrectAnswers h3{
+    padding: 20px;
+}
+
+.incorrectAnswers p{
+    margin: 25px;
 }
 
 .incorrectAnswersList{
@@ -12,7 +16,7 @@
     border: 1px solid #cccccc;
     padding: 10px;
     background-color: #646cffc0;
-    box-shadow: 0 0 10px rgb(255, 255, 255); /* Subtle box shadow */
+    box-shadow: 0 0 10px rgb(255, 255, 255); 
     border-radius: 10px;
 }
 
@@ -25,5 +29,5 @@
 }
 
 .playAgain{
-    margin: 25px;
+    margin-top: 30px;
 }

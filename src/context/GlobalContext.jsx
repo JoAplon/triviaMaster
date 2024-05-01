@@ -2,7 +2,7 @@ import {createContext, useState} from 'react'
 export const GlobalData = createContext()
 
 export default function GlobalContext({ children }) {
-    const [selectedCategory, setSelectedCategory] = useState([])
+    const [selectedCategory, setSelectedCategory] = useState(null)
     const [ selectedDifficulty, setSelectedDifficulty] = useState([])
 
     const handleSelectedCategory = (category) => {
