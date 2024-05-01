@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { getTriviaCategories } from '../utils/triviaAPI';
 import { GlobalData } from '../context/GlobalContext';
-
+import '../css/CategoryMenu.css'; // Import the CSS file
 
 const CategoryMenu = ({ onClose }) => {
   const {selectedCategory, setSelectedCategory} = useContext(GlobalData);
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    // Fetch categories from API
     const fetchCategories = async () => {
       try {
         const triviaCategories = await getTriviaCategories();
@@ -19,21 +18,17 @@ const CategoryMenu = ({ onClose }) => {
     };
 
     fetchCategories();
-  }, []); // Empty dependency array to run only once on component mount
+  }, []);
 
-  // const [selectedCategory, setSelectedCategory] = useState([]);
-
-  // adds the category to the array when selected and removes when selected again
-  const handleCategoryChange = (category) => {
-    if (selectedCategory?.includes(category)) {
-      setSelectedCategory(selectedCategory.filter((element) => element !== category));
-    } else {
-      setSelectedCategory([...selectedCategory, category]);
-    }
+  const handleCategoryChange = (event) => {
+    const selected = Array.from(
+      event.target.selectedOptions,
+      (option) => option.value
+    );
+    setSelectedCategory(selected);
   };
 
   const handleDone = () => {
-    // closes the category menu and console.logs the selections
     console.log('Selected categories:', selectedCategory);
     onClose();
   };
@@ -41,16 +36,18 @@ const CategoryMenu = ({ onClose }) => {
   return (
     <div className="category-menu">
       <h3>Choose Categories:</h3>
-      {categories.map((category) => (
-        <label key={category.id}>
-          <input
-            type="checkbox"
-            checked={selectedCategory?.includes(category.id)}
-            onChange={() => handleCategoryChange(category.id)}
-          />
-          {category.name}
-        </label>
-      ))}
+      <select
+        multiple
+        value={selectedCategory}
+        onChange={handleCategoryChange}
+        className="dropdown-menu"
+      >
+        {categories.map((category) => (
+          <option key={category.id} value={category.id}>
+            {category.name}
+          </option>
+        ))}
+      </select>
       <button onClick={handleDone}>Done</button>
     </div>
   );

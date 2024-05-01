@@ -1,33 +1,37 @@
-.profileContainer{
+/* Adjusted profile container */
+.profileContainer {
     width: 80vh;
     height: 100vh;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
-.pictureContainer{
+/* Picture Container */
+.pictureContainer {
     display: flex;
     align-items: center;
     margin: 40px;
 }
 
-.basicUserInfo{
-    
-}
-
-.profile-picture img{
+.profile-picture img {
     margin-right: 20px;
 }
 
-.leaderboardCategory{
+/* New container for leaderboard and categories */
+.leaderboardCategory {
     display: flex;
-    justify-content:space-between;
+    flex-direction: row; /* Arrange items side by side */
+    justify-content: space-between;
+    gap: 20px; /* Add some spacing between leaderboard and categories */
+    width: 100%; /* Make sure the parent container uses the available width */
     margin-top: 40px;
 }
 
-.leaderboardDisplay, .categoryDisplay{
+.leaderboardDisplay, .categoryDisplay {
     background-color: #646cffc0;
     box-shadow: 0 0 10px rgb(255, 255, 255); /* Subtle box shadow */
     border-radius: 10px;
     padding: 20px;
+    flex: 1; /* Allow both displays to grow and shrink as needed */
 }

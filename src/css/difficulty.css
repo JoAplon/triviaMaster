@@ -1,26 +1,42 @@
-.buttonContainer {
-  display: flex;
-  justify-content: space-between;
-  padding: 40px;
-  margin-top: 15px;
-}
-
 .difficulty-menu {
   border: 1px solid #cccccc;
-  border-radius: 5px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  background-color: #000000;
+  width: 300px; /* Fixed width for consistent appearance */
+  margin: 0 auto;
+  text-align: center;
+}
+
+.diffOptions {
+  display: flex;
+  justify-content: space-around; /* Evenly distribute the options */
+  margin-bottom: 20px; /* Space between options and button */
 }
 
 .diffLabel {
   display: flex;
-  justify-content: center;
-  padding: 5px;
-  margin-bottom: 5px;
+  flex-direction: column; /* Stack label and input vertically */
+  align-items: center; /* Center align text and input */
+  margin-bottom: 0; /* Remove bottom margin for consistency */
 }
 
-.diffLabel input{
-  width: 50px;
+.diffLabel input {
+  margin-top: 5px; /* Space between label and input */
 }
 
 .menuButton {
-  /* margin-bottom: 15px; */
+  padding: 10px 20px;
+  border: none;
+  background-color: #1e1e1e; /* Dark grey color */
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s;
+}
+
+.menuButton:hover {
+  background-color: #0056b3; /* Slightly darker shade for hover effect */
 }

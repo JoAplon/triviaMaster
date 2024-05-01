@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "../axiosconfig";
 import ProfilePictures from "./profilePics";
-import '../css/profile.css'
-// import tinyMouse from '../assets/tinyMouse.jpg'
-
+import '../css/profile.css';
 
 const Profile = () => {
     const [userData, setUserData] = useState(null);
@@ -71,11 +69,9 @@ const Profile = () => {
         fetchLeaderboardPosition("easy");
         fetchLeaderboardPosition("medium");
         fetchLeaderboardPosition("hard");
-       fetchSavedCategories();
+        fetchSavedCategories();
     }, []);
 
-
-    
 
     const profilePictures = {
         tinyMouse: '../assets/tinyMouse.jpg',
@@ -107,61 +103,55 @@ const Profile = () => {
             <h2>Welcome to Your Profile, {userData && userData.username}!</h2>
 
             <div className="pictureContainer">
-            <div className="profile-picture">
-                <img src={selectedPicture || "tinyMouse.jpg"} alt="Profile" />
-                <button onClick={() => setShowPopup(true)}>Change Picture</button>
-            </div>
-            {showPopup && (
-                <div className="popup-menu">
-                    <h3>Select Profile Picture: </h3>
-                    <ProfilePictures
-                        pictures={Object.keys(profilePictures)}
-                        onSelectPicture={handlePictureSelect}
-                    />
-                    <button onClick={handleSavedPictures}>Save</button>
+                <div className="profile-picture">
+                    <img src={selectedPicture || "tinyMouse.jpg"} alt="Profile" />
+                    <button onClick={() => setShowPopup(true)}>Change Picture</button>
                 </div>
-            )}
+                {showPopup && (
+                    <div className="popup-menu">
+                        <h3>Select Profile Picture: </h3>
+                        <ProfilePictures
+                            pictures={Object.keys(profilePictures)}
+                            onSelectPicture={handlePictureSelect}
+                        />
+                        <button onClick={handleSavedPictures}>Save</button>
+                    </div>
+                )}
             </div>
 
             {userData && (
                 <div className="userDetails">
-                <button className="userDetailsButton" onClick={toggleUserInfo}> Your info: 
-                    {/* <img src='https://img.icons8.com/android/24/000000/edit.png'/> */}
-                </button>
-                {showInfo && (
-
-                    <div className="basicUserInfo">
-                        <p>Username: {userData.username}</p>
-                        <p>Email: {userData.email}</p>
-                    </div>
-                
-                )}
-                         {/* <p>Wins: {userData.wins}</p> */}
-                 </div>
+                    <button className="userDetailsButton" onClick={toggleUserInfo}> Your info: </button>
+                    {showInfo && (
+                        <div className="basicUserInfo">
+                            <p>Username: {userData.username}</p>
+                            <p>Email: {userData.email}</p>
+                        </div>
+                    )}
+                </div>
             )}
 
             <div className="leaderboardCategory">
-            <div className="leaderboardDisplay">
-                <p>Here you are on the Leaderboard!</p> <br/>
-                {leaderboardPosition && (
+                <div className="leaderboardDisplay">
+                    <p>Here you are on the Leaderboard!</p> <br/>
+                    {leaderboardPosition && (
                         <ul>
                             <li>Easy: {leaderboardPosition.easy}</li>
                             <li>Medium: {leaderboardPosition.medium}</li>
                             <li>Hard: {leaderboardPosition.hard}</li>
                         </ul>
                     )}
-            </div>
-            </div>
-
-            <div className="categoryDisplay">
-                <p>These are your favorite categories! </p> <br/>
-                {savedCategories && (
-                    <ul>
-                        {savedCategories.map((category, index) => (
-                            <li key={index}>{category}</li>
-                        ))}
-                    </ul>
-                )}
+                </div>
+                <div className="categoryDisplay">
+                    <p>These are your favorite categories!</p> <br/>
+                    {savedCategories && (
+                        <ul>
+                            {savedCategories.map((category, index) => (
+                                <li key={index}>{category}</li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
             </div>
         </div>
     );
