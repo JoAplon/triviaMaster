@@ -33,19 +33,19 @@ const Profile = () => {
     //     startNewGame();
     // }, []);
 
-    // useEffect(() => {
-    //     const fetchUserData = async () => {
-    //         try {
-    //             const token = localStorage.getItem('token'); 
-    //             const headers = {
-    //                 'Authorization': `Bearer ${token}`
-    //             };
-    //             const response = await axios.get("api/users/me", { headers });
-    //             setUserData(response.data);
-    //         } catch (error) {
-    //             console.log('Error fetching user data.', error);
-    //         }
-    //     };
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const token = localStorage.getItem('token'); 
+                const headers = {
+                    'Authorization': `Bearer ${token}`
+                };
+                const response = await axios.get("api/users/me", { headers });
+                setUserData(response.data);
+            } catch (error) {
+                console.log('Error fetching user data.', error);
+            }
+        };
 
     //     const fetchLeaderboardPosition = async (difficulty) => {
     //         try {
@@ -56,21 +56,23 @@ const Profile = () => {
     //         }
     //     };
 
-    //     const fetchSavedCategories = async () => {
-    //         try {
-    //             const response = await axios.get("api/categories");
-    //             setSavedCategories(response.data);
-    //         } catch (error) {
-    //             console.log('Error fetching saved categories');
-    //         }
-    //     };
+        const fetchSavedCategories = async () => {
+            try {
+                const response = await axios.get("api/categories");
+                setSavedCategories(response.data);
+            } catch (error) {
+                console.log('Error fetching saved categories');
+            }
+        };
 
         fetchUserData();
-        fetchLeaderboardPosition("easy");
-        fetchLeaderboardPosition("medium");
-        fetchLeaderboardPosition("hard");
-        fetchSavedCategories();
+
+    //     fetchLeaderboardPosition("easy");
+    //     fetchLeaderboardPosition("medium");
+    //     fetchLeaderboardPosition("hard");
+       fetchSavedCategories();
     }, []);
+
 
 
     const profilePictures = {
