@@ -1,0 +1,29 @@
+.category-menu{
+    position: relative;
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #cccccc;
+    padding: 10px;
+    /* background-color: #646cffc0; */
+    box-shadow: 0 0 10px rgb(255, 255, 255);
+    border-radius: 10px;
+}
+
+.category-menu button{
+    position: sticky;
+    bottom: 0;
+}
+
+.category-menu h3{
+    margin-bottom: 15px;
+}
+
+.category-option {
+    display: flex;
+    align-items: center;
+  }
+  
+  .category-option input[type="radio"] {
+    margin-top: 7px;
+    width: 30px;
+  }

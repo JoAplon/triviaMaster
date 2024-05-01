@@ -1,28 +1,27 @@
 import React from 'react';
 import '../css/result.css';
-import { Link } from 'react-router-dom';
+import GameRoom from '../components/gameRoom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
-const Results = ({ score, incorrectAnswers, difficulty, categories }) => {
+const Results = ({ score, incorrectAnswers, difficulty, category }) => {
 
+  const navigate = useNavigate(); // Initialize useNavigate hook
 
   const handlePlayAgain = () => {
-    history.push({
-      pathname: '/game-room',
-      state: { difficulty, categories }
-    });
+    navigate('/mode-selection', { state: { difficulty, category } });
     console.log('Starting a new game with the same settings...');
-  
+
   }
 
   return (
     <div className='container'>
-      <h2>Results</h2>
-      <p>Score: {score}</p>
+      <h2>Results: </h2>
       <div className='incorrectAnswers'>
-      <p>Incorrect Answers:</p>
+      <h3>Score: {score} / 10</h3>
       <div className='incorrectAnswersList'>
       <ul>
+      <p>Incorrect Answers:</p>
         {incorrectAnswers.map((answer, index) => (
           <li key={index}>{answer}</li>
         ))}
