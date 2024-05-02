@@ -10,7 +10,7 @@ const TriviaQuestion = ({ question, options = [], onOptionSelect }) => {
       <h2>{question}</h2>
       <div className="options">
         {options.map((option, index) => (
-          <button key={index} onClick={() => onOptionSelect(option)}>
+          <button class="triviaButtons" key={index} onClick={() => onOptionSelect(option)}>
             {option}
           </button>
         ))}

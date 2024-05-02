@@ -3,7 +3,7 @@
 const SubmitAnswerButton = ({ onSubmit }) => {
   
   return (
-    <button onClick={onSubmit}>Submit Answer</button>
+    <button class="submitButton" onClick={onSubmit}>Submit Answer</button>
   );
 }
 

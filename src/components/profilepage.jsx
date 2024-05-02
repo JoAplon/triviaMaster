@@ -113,7 +113,7 @@ const Profile = () => {
             <div className="pictureContainer">
                 <div className="profile-picture">
                     <img src={selectedPicture || Mouse } alt="Profile" />
-                    <button onClick={() => setShowPopup(true)}>Change Picture</button>
+                    <button class="picButton" onClick={() => setShowPopup(true)}>Change Picture</button>
                 </div>
                 {showPopup && (
                     <div className="popup-menu">
@@ -122,7 +122,7 @@ const Profile = () => {
                             pictures={Object.keys(profilePictures)}
                             onSelectPicture={handlePictureSelect}
                         />
-                        <button onClick={handleSavedPictures}>Save</button>
+                        <button class="saveButton" onClick={handleSavedPictures}>Save</button>
                     </div>
                 )}
             </div>

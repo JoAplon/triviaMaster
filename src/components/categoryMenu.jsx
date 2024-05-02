@@ -48,7 +48,7 @@ const CategoryMenu = ({ onClose }) => {
           </option>
         ))}
       </select>
-      <button onClick={handleDone}>Done</button>
+      <button class="doneButton" onClick={handleDone}>Done</button>
     </div>
   );
 };

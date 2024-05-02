@@ -29,9 +29,9 @@ const WaitingRoom = () => {
             )}
           </div>
           <div className="roomActions">
-            <button onClick={() => handleJoinRoom(room.id)}>Join</button>
+            <button class="multiplayerButton" onClick={() => handleJoinRoom(room.id)}>Join</button>
             {room.players.length > 0 && (
-              <button>Expand</button>
+              <button class="multiplayerButton">Expand</button>
               // Logic to expand and show players in the room
             )}
           </div>

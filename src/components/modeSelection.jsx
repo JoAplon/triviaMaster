@@ -7,12 +7,12 @@ const ModeSelection = () => {
       <h2>Choose Game Mode: </h2>
       <div>
         <Link to="/singleplayer">
-          <button>Single Player</button>
+          <button class="modeButton">Single Player</button>
         </Link>
       </div>
       <div>
         <Link to="/multiplayer">
-          <button>Multiplayer</button>
+          <button class="modeButton">Multiplayer</button>
         </Link>
       </div>
     </div>

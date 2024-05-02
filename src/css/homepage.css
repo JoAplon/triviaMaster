@@ -1,3 +1,57 @@
 .gameButton{
     margin-top: 30px;
+    background-color: black;
 }
+
+.diffButton{
+    background-color: black;
+}
+
+.catButton{
+    background-color: black;
+}
+
+.modeButton{
+    background-color: black;
+}
+
+.submitButton{
+    background-color: black;
+}
+
+.triviaButtons{
+    background-color: black;
+}
+
+.playAgain{
+    background-color: black;
+}
+
+.multiplayerButton{
+    background-color: black;
+}
+
+.signupButton{
+    background-color: black;
+}
+
+.loginButton{
+    background-color: black;
+}
+
+.picButton{
+    background-color: black;
+}
+
+.saveButton{
+    background-color: black;
+}
+
+.userDetailsButton{
+    background-color: black;
+}
+
+.logoutButton{
+    background-color: black;
+}
+

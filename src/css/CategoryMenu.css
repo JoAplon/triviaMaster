@@ -5,7 +5,8 @@
     margin-top: 10px;
     border-radius: 4px;
     border: 1px solid #ccc;
-    background-color: #000000;
+    background-color: black;
+    color:white;
     box-shadow: 0 0 10px rgb(255, 255, 255);
     font-size: 1.2em; 
     overflow-y: auto; 
@@ -25,3 +26,7 @@
   button:hover {
     background-color: #0056b3; 
   }
+
+  .doneButton{
+    background-color: black;
+}

@@ -58,7 +58,7 @@ const Signup = () => {
                         <label>Password:</label>
                         <input type="password" value={password} name='password' onChange={(e) => setPassword(e.target.value)} required />
                     </div>
-                    <button type="submit">Signup!</button>
+                    <button class="signupButton" type="submit">Signup!</button>
                 </form>
             </div>
             <div className="signup-image">
