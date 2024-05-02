@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "../axiosconfig";
+import Logout from '../components/logout';
 import ProfilePictures from "./profilePics";
+import Mouse from '../assets/tinyMouse.jpg';
 import '../css/profile.css';
 
 const Profile = () => {
@@ -37,13 +39,15 @@ const Profile = () => {
         const fetchUserData = async () => {
             try {
                 const token = localStorage.getItem('token'); 
+                console.log('Token:', token);
                 const headers = {
                     'Authorization': `Bearer ${token}`
                 };
                 const response = await axios.get("api/users/me", { headers });
+                console.log('Response data:', response.data);
                 setUserData(response.data);
             } catch (error) {
-                console.log('Error fetching user data.', error);
+                console.error.response.data('Error fetching user data.', error);
             }
         };
 
@@ -72,6 +76,8 @@ const Profile = () => {
     //     fetchLeaderboardPosition("hard");
        fetchSavedCategories();
     }, []);
+
+
 
 
 
@@ -106,7 +112,7 @@ const Profile = () => {
 
             <div className="pictureContainer">
                 <div className="profile-picture">
-                    <img src={selectedPicture || "tinyMouse.jpg"} alt="Profile" />
+                    <img src={selectedPicture || Mouse } alt="Profile" />
                     <button onClick={() => setShowPopup(true)}>Change Picture</button>
                 </div>
                 {showPopup && (
@@ -154,6 +160,9 @@ const Profile = () => {
                         </ul>
                     )}
                 </div>
+            </div>
+            <div className="logoutContainer">
+                <Logout/>
             </div>
         </div>
     );

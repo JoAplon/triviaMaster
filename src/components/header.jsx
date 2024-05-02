@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Tooltip from './tooltip'
+import { getTriviaCategories } from '../utils/triviaAPI';
 import '../css/header.css'
 
 
@@ -12,7 +13,8 @@ const Header = () => {
     const [showSettingsButton, setShowSettingsButton] = useState(location.pathname !== '/');
     const [showSettingsMenu, setShowSettingsMenu] = useState(false);
     const [showProfileMenu, setShowProfileMenu] = useState(false);
-    
+  
+
     const toggleProfileMenu = () => {
         setShowProfileMenu(!showProfileMenu);
     };
@@ -21,38 +23,59 @@ const Header = () => {
         setShowSettingsMenu(!showSettingsMenu);
     }
 
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const triviaCategories = await getTriviaCategories();
+                // setCategories(triviaCategories); 
+            } catch (error) {
+                console.error('Error fetching categories:', error);
+            }
+        };
+
+        fetchCategories();
+    }, []); // Empty dependency array ensures this effect runs only once on component mount
+
+    const changeDifficulty = (newDifficulty) => {
+        setDifficulty(newDifficulty);
+    };
+
+    const changeCategory = (event) => {
+        const newCategory = event.target.value;
+        setCategory(newCategory);
+    };
 
     useEffect(() => {
         // console.log('Current pathname:', location.pathname);
         setShowTooltip(location.pathname === '/');
         setShowTooltipButton(location.pathname === '/');
-        setShowSettingsButton(location.pathname !== '/')
+        setShowSettingsButton(location.pathname === '/mode-selection' || location.pathname === '/singleplayer')
     }, [location]);
 
     const ProfileMenu = () => {
         return (
             <div className="profileMenu">
                 <ul>
-                {location.pathname !== '/profile' && ( 
+                    {location.pathname !== '/profile' && (
                         <li>
                             <Link to="/profile">Profile</Link>
                         </li>
-                )}
-                {location.pathname !== '/login' && (
-                    <li>
-                        <Link to="/login">Login</Link>
-                    </li>
-                )}
-                {location.pathname !== '/signup' && (
-                    <li>
-                        <Link to="/signup">Sign Up</Link>
-                    </li>
-                )}
-                { location.pathname !== '/' && (
-                    <li>
-                        <Link to={"/"}>Home</Link>
-                    </li>
-                )}
+                    )}
+                    {location.pathname !== '/login' && (
+                        <li>
+                            <Link to="/login">Login</Link>
+                        </li>
+                    )}
+                    {location.pathname !== '/signup' && (
+                        <li>
+                            <Link to="/signup">Sign Up</Link>
+                        </li>
+                    )}
+                    {location.pathname !== '/' && (
+                        <li>
+                            <Link to={"/"}>Home</Link>
+                        </li>
+                    )}
                 </ul>
             </div>
         );
@@ -62,18 +85,16 @@ const Header = () => {
         <header className="header">
             <nav>
                 <ul>
-                    {/* tooltip button dissapears when you leave the page
-                     but you need to refresh first. will come back to it later. */}
                     <li className='directions'>
                         {showTooltipButton && (
-                        <button className='directionsButton'>
-                            <img src='https://img.icons8.com/pulsar-line/48/ask-question.png'/>
-                        </button>
+                            <button className='directionsButton'>
+                                <img src='https://img.icons8.com/pulsar-line/48/ask-question.png' />
+                            </button>
                         )}
                         {showTooltip && (
                             <div className='directionsTooltip'>
                                 You can play without making an account.
-                                Choose your difficulty, categories, and number of questions then play on!
+                                Choose your difficulty, and categories then play on!
                                 If you have an account or want to signup just hit that profile button to get started.
                             </div>
                         )}
@@ -82,26 +103,27 @@ const Header = () => {
                     {showSettingsButton && (
                         <li className="settings">
                             <div className='settingsContainer'>
-                            <button className="settingsButton" onClick={toggleSettingMenu}>
+                                <button className="settingsButton" onClick={toggleSettingMenu}>
                                     <img src='https://img.icons8.com/ios-filled/50/settings.png' alt="Settings" />
-                            </button>
-                            { showSettingsMenu && (
+                                </button>
+                                { showSettingsMenu && (
                                 <div className='settingsMenu'>
                                     <button>Change Difficulty</button>
-                                    <button>Change Categories</button>
+                                    <button>Change Category</button>
                                     <button onClick={() => window.location.href = '/'}>Quit</button>
                                 </div>
                             )}
+
                             </div>
                         </li>
                     )}
 
                     <li className="profile">
-                        <button className='profileButton'  onClick={toggleProfileMenu}>
-                        <img src='https://img.icons8.com/wired/64/test-account.png'/>
+                        <button className='profileButton' onClick={toggleProfileMenu}>
+                            <img src='https://img.icons8.com/wired/64/test-account.png' />
                         </button>
                         {showProfileMenu && <ProfileMenu />}
-                         
+
                     </li>
 
                 </ul>
