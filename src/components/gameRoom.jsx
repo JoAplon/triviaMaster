@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import TriviaQuestion from './triviaQuestions';
 import SubmitAnswerButton from './submitAnswerButton';
 import Results from './result';
@@ -7,13 +8,13 @@ import '../styles/gameRoom.css';
 import { GlobalData } from '../context/GlobalContext';
 
 const GameRoom = () => {
-  const { selectedCategory, setSelectedCategory } = useContext(GlobalData);
-  const { selectedDifficulty, setSelectedDifficulty } = useContext(GlobalData);
+  const { selectedCategory, setSelectedCategory, selectedDifficulty, setSelectedDifficulty, userData, setUserData, score, setScore, triviaData, setTriviaData } = useContext(GlobalData);
+
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState([]);
   const [showResults, setShowResults] = useState(false);
-  const [score, setScore] = useState(0);
-  const [triviaData, setTriviaData] = useState([]);
+  // const [score, setScore] = useState(0);
+  // const [triviaData, setTriviaData] = useState([]);
   const [selectedOption, setSelectedOption] = useState("")
 
   useEffect(() => {
@@ -83,23 +84,45 @@ const GameRoom = () => {
   };
 
 
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (showResults === false ) return
+    const incorrectAnswers =  userAnswers.filter(answer => !answer.isCorrect).map(answer => answer.question)
+    const state = {
+      // score: score,
+      incorrectAnswers: incorrectAnswers, 
+      // incorrectAnswers: userAnswers,
+      // difficulty: selectedDifficulty,
+      // category: selectedCategory,
+      // userId: userData?._id
+    };
+
+    navigate('/results', { state });
+  }, [ showResults]);
+
+
+
   return (
     <div className="GameRoom">
-      {showResults ? (
+      {/* {showResults ? (
         <Results
-          score={score} // Update to display the total score
+          category={selectedCategory}
+          difficulty={selectedDifficulty}
+          questions={triviaData}
+          score={score} 
           incorrectAnswers={userAnswers.filter(answer => !answer.isCorrect).map(answer => answer.question)}
         />
-      ) : (
-        <div>
-          <TriviaQuestion
-            question={triviaData[currentQuestionIndex]?.question}
-            options={triviaData[currentQuestionIndex]?.incorrect_answers.concat(triviaData[currentQuestionIndex]?.correct_answer)}
-            onOptionSelect={handleOptionSelect}
-          />
-          <SubmitAnswerButton onSubmit={handleAnswerSubmit} />
-        </div>
-      )}
+      ) : ( */}
+      <div>
+        <TriviaQuestion
+          question={triviaData[currentQuestionIndex]?.question}
+          options={triviaData[currentQuestionIndex]?.incorrect_answers.concat(triviaData[currentQuestionIndex]?.correct_answer)}
+          onOptionSelect={handleOptionSelect}
+        />
+        <SubmitAnswerButton onSubmit={handleAnswerSubmit} />
+      </div>
+      {/* )} */}
     </div>
   );
 };

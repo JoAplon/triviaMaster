@@ -13,9 +13,11 @@ const Header = () => {
     const [showSettingsButton, setShowSettingsButton] = useState(location.pathname !== '/');
     const [showSettingsMenu, setShowSettingsMenu] = useState(false);
     const [showProfileMenu, setShowProfileMenu] = useState(false);
-  
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
 
     const toggleProfileMenu = () => {
+        setIsLoggedIn(!isLoggedIn);
         setShowProfileMenu(!showProfileMenu);
     };
 
@@ -56,17 +58,17 @@ const Header = () => {
         return (
             <div className="profileMenu">
                 <ul>
-                    {location.pathname !== '/profile' && (
+                    {isLoggedIn && location.pathname !== '/profile' && (
                         <li>
                             <Link to="/profile">Profile</Link>
                         </li>
                     )}
-                    {location.pathname !== '/login' && (
+                    {isLoggedIn && location.pathname !== '/login' && (
                         <li>
                             <Link to="/login">Login</Link>
                         </li>
                     )}
-                    {location.pathname !== '/signup' && (
+                    {isLoggedIn && location.pathname !== '/signup' && (
                         <li>
                             <Link to="/signup">Sign Up</Link>
                         </li>
@@ -106,25 +108,28 @@ const Header = () => {
                                 <button className="settingsButton" onClick={toggleSettingMenu}>
                                     <img src='https://img.icons8.com/ios-filled/50/settings.png' alt="Settings" />
                                 </button>
-                                { showSettingsMenu && (
-                                <div className='settingsMenu'>
-                                    <button>Change Difficulty</button>
-                                    <button>Change Category</button>
-                                    <button onClick={() => window.location.href = '/'}>Quit</button>
-                                </div>
-                            )}
+                                {showSettingsMenu && (
+                                    <div className='settingsMenu'>
+                                        <button>Change Difficulty</button>
+                                        <button>Change Category</button>
+                                        <button onClick={() => window.location.href = '/'}>Quit</button>
+                                    </div>
+                                )}
 
                             </div>
                         </li>
                     )}
 
-                    <li className="profile">
+
+                        
+                        <li className="profile">
                         <button className='profileButton' onClick={toggleProfileMenu}>
                             <img src='https://img.icons8.com/wired/64/test-account.png' />
                         </button>
                         {showProfileMenu && <ProfileMenu />}
 
                     </li>
+
 
                 </ul>
             </nav>
