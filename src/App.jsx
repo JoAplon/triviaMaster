@@ -8,7 +8,7 @@ import GameRoom from '../src/components/gameRoom';
 import Login from './components/loginPage';
 import Signup from './components/signupPage';
 import Profile from '../src/components/profilepage'
-import ModeSelection from '../src/components/modeSelection';
+// import ModeSelection from '../src/components/modeSelection';
 import WaitingRoom from '../src/components/waitingRoom';
 import Results from '../src/components/result';
 import { useState } from 'react';
@@ -41,14 +41,6 @@ function App() {
         }
     };
 
-    //     const fetchLeaderboardPosition = async (difficulty) => {
-    //         try {
-    //             const response = await axios.get(`api/leaderboard/${difficulty}`);
-    //             setLeaderboardPosition(response.data.position);
-    //         } catch (error) {
-    //             console.log('Error fetching leaderboard position.');
-    //         }
-    //     };
 
     // const fetchSavedCategories = async () => {
     //     try {
@@ -61,11 +53,7 @@ function App() {
 
 
     fetchUserData();
-    // fetchGameData();
 
-    //     fetchLeaderboardPosition("easy");
-    //     fetchLeaderboardPosition("medium");
-    //     fetchLeaderboardPosition("hard");
     // fetchSavedCategories();
 }, [setUserData]);
   
@@ -76,12 +64,12 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/mode-selection" element={<ModeSelection />} />
+            {/* <Route path="/mode-selection" element={<ModeSelection />} /> */}
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/results" element={<Results />}/>
             <Route path="/profile" element={<Profile userData={userData}/>} />
-            <Route path="/singleplayer" element={<GameRoom />} />
+            <Route path="/game-room" element={<GameRoom />} />
             <Route path="/multiplayer" element={<WaitingRoom />} />
           </Routes>
         </main>

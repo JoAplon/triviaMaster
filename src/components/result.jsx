@@ -96,7 +96,7 @@ const Results = () => {
             // state: { score, questions, difficulty, category, userId }
           }}
         >
-          Go to Profile
+          <button>Go to Profile</button>
         </Link>
 
       </div>

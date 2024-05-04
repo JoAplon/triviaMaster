@@ -24,6 +24,7 @@ const GameRoom = () => {
 
   useEffect(() => {
     console.log('Selected Difficulty:', selectedDifficulty);
+
     const fetchTrivia = async () => {
       try {
 
