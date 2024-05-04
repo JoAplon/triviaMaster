@@ -1,6 +1,5 @@
-/* Adjusted profile container */
 .profileContainer {
-    width: 100vh;
+    /* width: 100vh; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -8,18 +7,24 @@
     margin: 40px;
 }
 
-/* Picture Container */
 .pictureContainer {
     display: flex;
+    justify-content: space-between;
     align-items: center;
+    width: 600px;
     margin: 40px;
+}
+
+.userDetails button{
+    width: 200px;
+    position: relative;
 }
 
 .profile-picture img {
     margin-right: 20px;
-    width: 90%;
+    
     height: 200px;
-    border-radius: 50%;
+    /* border-radius: 50%; */
 }
 
 .profile-picture button{
@@ -27,20 +32,24 @@
 }
 
 .profile-picture-list{
+    position: absolute;
+    left: 0;
+    top: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Define columns with a minimum width of 100px */
-    gap: 20px; /* Add some spacing between the images */
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); 
+    gap: 20px; 
     background-color: #646cffc0;
     box-shadow: 0 0 10px rgb(255, 255, 255);
-    padding: 20px; /* Add padding to the container */
+    padding: 20px; 
     border-radius: 10px;
     margin: 20px;
+
 }
 
 .profile-picture-list img{
-    width: 100%; /* Ensure all images fill their respective grid cells */
-    height: 100%; /* Ensure all images fill their respective grid cells */
-    object-fit: cover; Maintain aspect ratio and cover the entire grid cell
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover;
     border-radius: 10px; }
 
 .popup-menu button{
@@ -48,7 +57,7 @@
 }
 
 .logoutContainer{
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
 }
@@ -61,20 +70,48 @@
     width: 100px;
 }
 
-/* New container for leaderboard and categories */
+
+.gameResults{
+    box-shadow: 0 0 10px rgb(255, 255, 255);
+    padding: 20px; 
+    border-radius: 10px;
+    width: 300px;
+    margin: 20px;
+}
+
+.gameResults button{
+    width: 150px;
+}
+
+.gameResults a:hover{
+    color: #c3c6ffc0;
+  }
+
+.categoryDisplay button{
+    width: 150px;
+}
+
+.categoryDisplay .clearGamesButton{
+    width: 300px;
+}
+
+.categoryDisplay a:hover{
+    color: black;
+}
+
 .leaderboardCategory {
     display: flex;
-    flex-direction: row; /* Arrange items side by side */
+    flex-direction: row; 
     justify-content: space-between;
-    gap: 20px; /* Add some spacing between leaderboard and categories */
-    width: 100%; /* Make sure the parent container uses the available width */
+    gap: 20px; 
+    width: 100%; 
     margin-top: 40px;
 }
 
 .leaderboardDisplay, .categoryDisplay {
     background-color: #646cffc0;
-    box-shadow: 0 0 10px rgb(255, 255, 255); /* Subtle box shadow */
+    box-shadow: 0 0 10px rgb(255, 255, 255); 
     border-radius: 10px;
     padding: 20px;
-    flex: 1; /* Allow both displays to grow and shrink as needed */
+    flex: 1; 
 }

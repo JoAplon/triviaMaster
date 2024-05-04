@@ -157,11 +157,10 @@ const Profile = ({ score, incorrectAnswers, questions, difficulty, category, use
                                     />
                                 </li>
                             ))}
-                        </ul>
                         <button onClick={handleSavedPictures}>Save</button>
+                        </ul>
                     </div>
                 )}
-            </div>
 
             {userData && (
                 <div className="userDetails">
@@ -174,8 +173,9 @@ const Profile = ({ score, incorrectAnswers, questions, difficulty, category, use
                     )}
                 </div>
             )}
+            </div>
 
-            <div>
+            <div className="gameResults">
                 <h2>Game Results: </h2>
                 {games?.length > 0 && (
                     <div>
@@ -210,7 +210,7 @@ const Profile = ({ score, incorrectAnswers, questions, difficulty, category, use
                             <button onClick={() => copyToClipboard(`https://triviamindmeld.netlify.app/play?category=${encodeURIComponent(game.category)}&difficulty=${encodeURIComponent(game.difficulty)}`)}>Copy link</button>
                         </div>
                     ))}
-                                        {games && games.length > 0 && <button onClick={clearGames}>Clear Games</button>}
+                                        {games && games.length > 0 && <button className="clearGamesButton" onClick={clearGames}>Clear Games</button>}
 
                 </div>
             </div>
