@@ -1,0 +1,55 @@
+/* gameRoom.css */
+.GameRoom {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* background-color: #f5f5f5; */
+    padding: 20px;
+}
+
+.triviaQuestion {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #fffbfb;
+    text-align: center;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.option {
+    /* background-color: #fff; */
+    border: 1px solid #ddd;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.option:hover {
+    background-color: #0080cf;
+    border-color: #ccc;
+}
+
+.submitButton {
+    background-color: #4c7aaf;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.submitButton:hover {
+    background-color: #3f34db;
+}

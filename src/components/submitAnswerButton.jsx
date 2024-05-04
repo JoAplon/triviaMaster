@@ -1,10 +1,11 @@
-
+// submitAnswerButton.jsx
 
 const SubmitAnswerButton = ({ onSubmit }) => {
-  
   return (
-    <button onClick={onSubmit}>Submit Answer</button>
+    <button className="submitButton" onClick={onSubmit}>
+      Submit Answer
+    </button>
   );
-}
+};
 
 export default SubmitAnswerButton;

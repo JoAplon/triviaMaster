@@ -4,7 +4,7 @@ import TriviaQuestion from './triviaQuestions';
 import SubmitAnswerButton from './submitAnswerButton';
 import Results from './result';
 import { getTriviaQuestions } from '../utils/triviaAPI'; // Correct import path
-import '../styles/gameRoom.css';
+import '../css/gameRoom.css';
 import { GlobalData } from '../context/GlobalContext';
 
 const GameRoom = () => {
