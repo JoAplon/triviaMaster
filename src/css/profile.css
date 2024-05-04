@@ -1,10 +1,11 @@
 /* Adjusted profile container */
 .profileContainer {
-    width: 80vh;
-    height: 100vh;
+    width: 100vh;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
+    margin: 40px;
 }
 
 /* Picture Container */
@@ -16,6 +17,48 @@
 
 .profile-picture img {
     margin-right: 20px;
+    width: 90%;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.profile-picture button{
+    width: 200px
+}
+
+.profile-picture-list{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Define columns with a minimum width of 100px */
+    gap: 20px; /* Add some spacing between the images */
+    background-color: #646cffc0;
+    box-shadow: 0 0 10px rgb(255, 255, 255);
+    padding: 20px; /* Add padding to the container */
+    border-radius: 10px;
+    margin: 20px;
+}
+
+.profile-picture-list img{
+    width: 100%; /* Ensure all images fill their respective grid cells */
+    height: 100%; /* Ensure all images fill their respective grid cells */
+    object-fit: cover; Maintain aspect ratio and cover the entire grid cell
+    border-radius: 10px; }
+
+.popup-menu button{
+    width: 200px
+}
+
+.logoutContainer{
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.logoutContainer button{
+    border-radius: 10px;
+    margin: 20px;
+    background-color: #7178ff;
+    color: black;
+    width: 100px;
 }
 
 /* New container for leaderboard and categories */

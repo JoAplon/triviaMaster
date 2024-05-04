@@ -5,7 +5,7 @@
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #1a1a1a; /* Initial color */
-  background-image: linear-gradient(-5deg, #1a1a1a, #383fc3); Gradient from initial to final color
+  background-image: linear-gradient(-5deg, #1a1a1a, #383fc3); 
   transition: background-color 0.5s; 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -55,7 +55,7 @@ button:focus-visible {
 }
 
 
-
+/* 
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -67,4 +67,4 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-}
+} */
