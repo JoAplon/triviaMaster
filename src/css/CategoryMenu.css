@@ -9,6 +9,7 @@
     box-shadow: 0 0 10px rgb(255, 255, 255);
     font-size: 1.2em; 
     overflow-y: auto; 
+    color: white;
   }
   
   button {
