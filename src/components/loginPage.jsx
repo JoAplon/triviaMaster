@@ -17,6 +17,7 @@ const Login = () => {
             // console.log(user);
     
             localStorage.setItem('token', token);
+            
             navigate('/');
         } catch (error) {
             setError('Invalid email or password');

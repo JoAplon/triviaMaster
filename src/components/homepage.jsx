@@ -1,17 +1,22 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Header from './header';
 import DifficultyMenu from './difficultyMenu';
 import CategoryMenu from './categoryMenu';
 import Leaderboard from './leaderboard';
+import '../css/homepage.css'
 import GameRoom from '../components/gameRoom';
 import axios from '../axiosconfig';
+import BootstrapAlert from './modal';
 import { GlobalData } from '../context/GlobalContext';
 
 const Home = () => {
-  const {selectedCategory, setSelectedCategory} = useContext(GlobalData)
+  const { selectedCategory, setSelectedCategory } = useContext(GlobalData);
+  const { selectedDifficulty, setSelectedDifficulty } = useContext(GlobalData);
   const [showDifficultyMenu, setShowDifficultyMenu] = useState(false);
   const [showCategoryMenu, setShowCategoryMenu] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
 
 
   const [leaderboardData, setLeaderboardData] = useState([
@@ -21,14 +26,15 @@ const Home = () => {
     // Add more players as needed
   ]);
 
+
   useEffect(() => {
-  console.log(selectedCategory)
+    console.log(selectedCategory)
   }, [selectedCategory])
-  
+
 
   // const [selectedCategory, setSelectedCategory] = useState(null);
-  const [selectedDifficulty, setSelectedDifficulty] = useState(null);
-  
+  // const [selectedDifficulty, setSelectedDifficulty] = useState(null);
+
 
   const handleToggleCategoryMenu = () => {
     setShowCategoryMenu(!showCategoryMenu);
@@ -49,18 +55,39 @@ const Home = () => {
     localStorage.setItem('selectedCategory', category); // Save to local storage
   };
 
-  useEffect(() => {
-    // Simulate leaderboard data update
-    const intervalId = setInterval(() => {
-      const updatedLeaderboard = leaderboardData.map((player) => ({
-        ...player,
-        // score: player.score + Math.floor(Math.random() * 10),
-      }));
-      setLeaderboardData(updatedLeaderboard);
-    }, 5000);
+  // useEffect(() => {
+  //   // Simulate leaderboard data update
+  //   const intervalId = setInterval(() => {
+  //     const updatedLeaderboard = leaderboardData.map((player) => ({
+  //       ...player,
+  //       // score: player.score + Math.floor(Math.random() * 10),
+  //     }));
+  //     setLeaderboardData(updatedLeaderboard);
+  //   }, 5000);
 
-    return () => clearInterval(intervalId);
-  }, [leaderboardData]);
+  //   return () => clearInterval(intervalId);
+  // }, [leaderboardData]);
+
+  const handleConfirmEnter = () => {
+    setIsModalOpen(false); // Close the modal
+    setShowAlert(false); // Reset showAlert to false
+  };
+  
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+
+    const [showAlert, setShowAlert] = useState(false);
+
+    const handleClick = () => {
+      if (selectedCategory && selectedDifficulty) {
+        navigate('/game-room');
+      } else {
+        setShowAlert(true);
+      }
+    }
+    
 
 
   return (
@@ -68,20 +95,24 @@ const Home = () => {
       <Header />
       <h1>Trivia Mind Meld</h1>
       <h2>The Best Trivia Game Around!</h2>
-      <Link to="/mode-selection">
-        <button>Enter Game Room</button>
-      </Link>
+
+          <>
+            <button className='gameButton' onClick={handleClick}>Enter Game Room</button>
+            {showAlert && <BootstrapAlert />}
+
+          </>
+ 
       <div className='buttonContainer'>
 
         <button className='diffButton' onClick={handleToggleDifficultyMenu}>Difficulty</button>
         <button className='catButton' onClick={handleToggleCategoryMenu}>Category</button>
       </div>
-      {showDifficultyMenu && <DifficultyMenu difficulties={['Easy', 'Medium', 'Hard']} onSelect={handleDifficultySelect} onClose={() => setShowDifficultyMenu(false)} />}
+      {showDifficultyMenu && <DifficultyMenu difficulties={['easy', 'medium', 'hard']} onSelect={handleDifficultySelect} onClose={() => setShowDifficultyMenu(false)} />}
       {showCategoryMenu && <CategoryMenu onSelect={handleCategorySelect} onClose={() => setShowCategoryMenu(false)} />}
 
-      <Leaderboard leaderboardData={leaderboardData} />
+      {/* <Leaderboard leaderboardData={leaderboardData} /> */}
       {/* {selectedCategory && selectedDifficulty && <GameRoom selectedCategory={selectedCategory} selectedDifficulty={selectedDifficulty} />} */}
-      
+
     </div>
 
 

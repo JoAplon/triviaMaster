@@ -12,17 +12,25 @@ const Signup = () => {
 
     const handleSignup = async (e) => {
         e.preventDefault();
-        const formData = new FormData();
-        formData.append('username', username);
-        formData.append('email', email);
-        formData.append('password', password);
+//         const formData = new FormData();
+//         formData.append('username', username);
+//         formData.append('email', email);
+//         formData.append('password', password);
+// console.log(formData);
 
+        const newUser = {
+            username: username,
+            email: email,
+            password: password,
+        }
+        console.log(newUser);
         try {
-            const response = await axios.post('/api/users/register', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
+            const response = await axios.post('/api/users/register', newUser)
+            //  {
+                // headers: {
+                //     'Content-Type': 'multipart/form-data',
+                // },
+            // });
             const { token } = response.data;
             localStorage.setItem('token', token);
             navigate('/');
@@ -40,15 +48,15 @@ const Signup = () => {
                 <form onSubmit={handleSignup}>
                     <div>
                         <label>Username:</label>
-                        <input type="username" value={username} onChange={(e) => setUsername(e.target.value)} required />
+                        <input type="username" value={username} name='username' onChange={(e) => setUsername(e.target.value)} required />
                     </div>
                     <div>
                         <label>Email:</label>
-                        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                        <input type="email" value={email} name='email' onChange={(e) => setEmail(e.target.value)} required />
                     </div>
                     <div>
                         <label>Password:</label>
-                        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                        <input type="password" value={password} name='password' onChange={(e) => setPassword(e.target.value)} required />
                     </div>
                     <button type="submit">Signup!</button>
                 </form>

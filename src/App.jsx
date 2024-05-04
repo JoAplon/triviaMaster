@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 import axios from './axiosconfig'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
@@ -8,12 +8,54 @@ import GameRoom from '../src/components/gameRoom';
 import Login from './components/loginPage';
 import Signup from './components/signupPage';
 import Profile from '../src/components/profilepage'
-import ModeSelection from '../src/components/modeSelection';
+// import ModeSelection from '../src/components/modeSelection';
 import WaitingRoom from '../src/components/waitingRoom';
+import Results from '../src/components/result';
+import { useState } from 'react';
+import { GlobalData } from './context/GlobalContext';
+
 
 
 function App() {
 
+  const { selectedCategory, setSelectedCategory, selectedDifficulty, setSelectedDifficulty, userData, setUserData, results, setResults } = useContext(GlobalData);
+  const [gameResults, setGameResults] = useState(null);
+
+  const receiveGameResults = (results) => {
+    setGameResults(results);
+  };
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            console.log('Token:', token);
+            const headers = {
+                'Authorization': `Bearer ${token}`
+            };
+            const response = await axios.get("api/users/me", { headers });
+            console.log('Response data:', response.data);
+            setUserData(response.data);
+        } catch (error) {
+            console.error.response.data('Error fetching user data.', error);
+        }
+    };
+
+
+    // const fetchSavedCategories = async () => {
+    //     try {
+    //         const response = await axios.get("api/categories");
+    //         setSavedCategories(response.data);
+    //     } catch (error) {
+    //         console.log('Error fetching saved categories');
+    //     }
+    // };
+
+
+    fetchUserData();
+
+    // fetchSavedCategories();
+}, [setUserData]);
   
   return (
     <Router>
@@ -22,11 +64,12 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/mode-selection" element={<ModeSelection />} />
+            {/* <Route path="/mode-selection" element={<ModeSelection />} /> */}
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/singleplayer" element={<GameRoom />} />
+            <Route path="/results" element={<Results />}/>
+            <Route path="/profile" element={<Profile userData={userData}/>} />
+            <Route path="/game-room" element={<GameRoom />} />
             <Route path="/multiplayer" element={<WaitingRoom />} />
           </Routes>
         </main>

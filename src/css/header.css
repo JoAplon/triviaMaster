@@ -6,7 +6,7 @@
     right: 0;
     list-style-type: none;
     margin: 10px;
-    position: fixed;
+    position: absolute;
     border-radius: 100%;
     width: 70px;
     height: 70px;
@@ -17,17 +17,10 @@
   .profileMenu{
     list-style-type: none;
     position:absolute;
-    /* background-color: #1a1a1a; */
-    /* display: flex; */
-    /* justify-content: end; */
-    /* top: calc(20% -10px); */
     top: 30px;
     right: 10px;
     width: 200px;
-    /* padding: 5px; */
-    /* margin: 43px; */
     padding-right: 100px;
-
 }
 
   ul{
@@ -40,6 +33,20 @@
 
   .profileMenu ul li a:hover{
     color: #03030898;
+  }
+
+  
+  .profileLink li a:hover{
+    color: #03030898;
+  }
+
+  .profileLink{
+    list-style-type: none;
+    position:absolute;
+    top: 8px;
+    right: 10px;
+    width: 200px;
+    padding-right: 100px;
   }
 
   .settingsContainer, .settingsButton{
