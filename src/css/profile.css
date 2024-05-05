@@ -1,117 +1,180 @@
 .profileContainer {
-    /* width: 100vh; */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 40px;
+    gap: 20px; 
 }
 
 .pictureContainer {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column; 
+    justify-content: center;
     align-items: center;
     width: 600px;
-    margin: 40px;
+    margin: 40px auto; 
+    gap: 20px;
 }
 
-.userDetails button{
+.userDetails button {
     width: 200px;
-    position: relative;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #7178ff;
+    color: white;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.userDetails button:hover {
+    background-color: #5a63d8;
 }
 
 .profile-picture img {
-    margin-right: 20px;
-    
-    height: 200px;
+    height: 150px;
     border-radius: 50%;
+    transition: transform 0.3s;
 }
 
-.profile-picture button{
-    width: 200px
+.profile-picture img:hover {
+    transform: scale(1.1); 
 }
 
-.profile-picture-list{
-    position: absolute;
-    left: 0;
-    top: 0;
+.profile-picture button {
+    width: 200px;
+    border-radius: 8px;
+    background-color: #646cff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.profile-picture button:hover {
+    background-color: #505ccf;
+}
+
+.profile-picture-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); 
-    gap: 20px; 
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    gap: 10px;
     background-color: #646cffc0;
-    box-shadow: 0 0 10px rgb(255, 255, 255);
-    padding: 20px; 
-    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); 
+    padding: 15px;
+    border-radius: 12px;
     margin: 20px;
-
 }
 
-.profile-picture-list img{
-    width: 100%; 
-    height: 100%; 
+.profile-picture-list img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    border-radius: 10px; }
-
-.popup-menu button{
-    width: 200px
+    border-radius: 12px;
+    transition: transform 0.3s; 
 }
 
-.logoutContainer{
+.profile-picture-list img:hover {
+    transform: scale(1.1); 
+}
+
+.popup-menu button {
+    width: 200px;
+    border-radius: 8px;
+    background-color: #646cff;
+    color: rgb(255, 255, 255);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.popup-menu button:hover {
+    background-color: #3300ce;
+}
+
+.logoutContainer {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 0px; 
+    left: 20px;
 }
 
-.logoutContainer button{
-    border-radius: 10px;
-    margin: 20px;
+.logoutContainer button {
+    border-radius: 8px;
     background-color: #7178ff;
-    color: black;
+    color: white;
     width: 100px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
+.logoutContainer button:hover {
+    background-color: #3300ce;
+}
 
-.gameResults{
-    box-shadow: 0 0 10px rgb(255, 255, 255);
-    padding: 20px; 
-    border-radius: 10px;
+.gameResults {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 12px;
     width: 300px;
     margin: 20px;
 }
 
-.gameResults button{
+.gameResults button {
     width: 150px;
+    border-radius: 8px;
+    background-color: #646cff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-.gameResults a:hover{
-    color: #c3c6ffc0;
-  }
-
-.categoryDisplay button{
-    width: 150px;
+.gameResults button:hover {
+    background-color: #505ccf;
 }
 
-.categoryDisplay .clearGamesButton{
+.gameResults a:hover {
+    color: #3300ce;
+}
+
+.categoryDisplay button {
+    width: 150px;
+    border-radius: 8px;
+    background-color: #646cff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.categoryDisplay button:hover {
+    background-color: #3300ce;
+}
+
+.categoryDisplay .clearGamesButton {
     width: 300px;
+    border-radius: 8px;
 }
 
-.categoryDisplay a:hover{
+.categoryDisplay a:hover {
     color: black;
 }
 
 .leaderboardCategory {
     display: flex;
-    flex-direction: row; 
+    flex-direction: row;
     justify-content: space-between;
-    gap: 20px; 
-    width: 100%; 
+    gap: 20px;
+    width: 100%;
     margin-top: 40px;
 }
 
 .leaderboardDisplay, .categoryDisplay {
     background-color: #646cffc0;
-    box-shadow: 0 0 10px rgb(255, 255, 255); 
-    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); 
+    border-radius: 12px;
     padding: 20px;
-    flex: 1; 
+    flex: 1;
 }
