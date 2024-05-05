@@ -29,12 +29,12 @@ function App() {
     const fetchUserData = async () => {
         try {
             const token = localStorage.getItem('token');
-            console.log('Token:', token);
+            // console.log('Token:', token);
             const headers = {
                 'Authorization': `Bearer ${token}`
             };
             const response = await axios.get("api/users/me", { headers });
-            console.log('Response data:', response.data);
+            // console.log('Response data:', response.data);
             setUserData(response.data);
         } catch (error) {
             console.error.response.data('Error fetching user data.', error);
