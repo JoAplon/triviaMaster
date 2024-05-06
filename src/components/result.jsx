@@ -18,7 +18,7 @@ const Results = () => {
   const navigate = useNavigate();
 
   const handlePlayAgain = () => {
-    navigate('/mode-selection', { state: { selectedDifficulty, selectedCategory } });
+    navigate('/game-room', { state: { selectedDifficulty, selectedCategory } });
     console.log('Starting a new game with the same settings...');
 
   }
