@@ -12,7 +12,6 @@
     flex-direction: column; 
     justify-content: center;
     align-items: center;
-    width: 600px;
     margin: 40px auto; 
     gap: 20px;
 }
@@ -79,8 +78,10 @@
     transform: scale(1.1); 
 }
 
+
+
 .popup-menu button {
-    width: 200px;
+    width: 100px;
     border-radius: 8px;
     background-color: #646cff;
     color: rgb(255, 255, 255);
@@ -139,6 +140,12 @@
     color: #3300ce;
 }
 
+.categoryDisplay{
+    margin: 20px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
 .categoryDisplay button {
     width: 150px;
     border-radius: 8px;
@@ -177,4 +184,22 @@
     border-radius: 12px;
     padding: 20px;
     flex: 1;
+}
+
+.cheatsheetContainer{
+    background-color: #5d65ff;
+    max-height: 300px;
+    overflow-y: auto;
+    margin: 20px;
+    border-radius: 8px;
+}
+
+.cheatsheet{
+    position: relative;
+    /* top: calc(100% + 10px); */
+    left: 0;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    width: 300px;
 }

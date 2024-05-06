@@ -1,25 +1,26 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import axios from './axiosconfig'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import './App.css';
 import Header from '../src/components/header'
+import Footer from './components/footer';
 import Home from '../src/components/homepage';
 import GameRoom from '../src/components/gameRoom';
 import Login from './components/loginPage';
 import Signup from './components/signupPage';
-import Profile from '../src/components/profilepage'
-// import ModeSelection from '../src/components/modeSelection';
-import WaitingRoom from '../src/components/waitingRoom';
-import Results from '../src/components/result';
-import { useState } from 'react';
+import Profile from '../src/components/profilepage';
+import Results from './components/result'
+// import ParticleComponent from './components/particles';
 import { GlobalData } from './context/GlobalContext';
+import Refresh from './components/refresh'
+// import ModeSelection from '../src/components/modeSelection';
+// import WaitingRoom from '../src/components/waitingRoom';
 
 
 
 function App() {
-
   const { selectedCategory, setSelectedCategory, selectedDifficulty, setSelectedDifficulty, userData, setUserData, results, setResults } = useContext(GlobalData);
-  const [gameResults, setGameResults] = useState(null);
 
   const receiveGameResults = (results) => {
     setGameResults(results);
@@ -42,26 +43,17 @@ function App() {
     };
 
 
-    // const fetchSavedCategories = async () => {
-    //     try {
-    //         const response = await axios.get("api/categories");
-    //         setSavedCategories(response.data);
-    //     } catch (error) {
-    //         console.log('Error fetching saved categories');
-    //     }
-    // };
-
-
     fetchUserData();
 
-    // fetchSavedCategories();
-}, [setUserData]);
+}, [ setUserData]);
+
   
   return (
     <Router>
       <div className="App">
         <Header />
         <main>
+        {/* <ParticleComponent /> */}
           <Routes>
             <Route path="/" element={<Home />} />
             {/* <Route path="/mode-selection" element={<ModeSelection />} /> */}
@@ -70,9 +62,10 @@ function App() {
             <Route path="/results" element={<Results />}/>
             <Route path="/profile" element={<Profile userData={userData}/>} />
             <Route path="/game-room" element={<GameRoom />} />
-            <Route path="/multiplayer" element={<WaitingRoom />} />
+            {/* <Route path="/multiplayer" element={<WaitingRoom />} /> */}
           </Routes>
         </main>
+        <Footer />
       </div>
     </Router>
   );
