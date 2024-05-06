@@ -15,7 +15,7 @@ const Results = () => {
   const { incorrectAnswers } = location.state;
 
 
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const handlePlayAgain = () => {
     navigate('/mode-selection', { state: { selectedDifficulty, selectedCategory } });
@@ -29,7 +29,10 @@ const Results = () => {
     console.log(incorrectAnswers);
     console.log(results);
   }, [])
-  
+
+  useEffect(() => {
+    localStorage.setItem('score', JSON.stringify(score));
+  }, [score]);
 
   useEffect(() => {
 
@@ -90,14 +93,20 @@ const Results = () => {
         ))} */}
 
 
-        <Link
-          to={{
-            pathname: '/profile',
-            // state: { score, questions, difficulty, category, userId }
-          }}
-        >
-          <button>Go to Profile</button>
-        </Link>
+        {userData ? (
+          <Link
+            to={{
+              pathname: '/profile',
+              // state: { score, questions, difficulty, category, userId }
+            }}
+          >
+            <button>Go to Profile</button>
+          </Link>
+        ) : (
+          <Link to="/">
+            <button>Go to Home</button>
+          </Link>
+        )}
 
       </div>
     </div>
