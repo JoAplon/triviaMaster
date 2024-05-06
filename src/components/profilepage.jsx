@@ -15,28 +15,69 @@ import '../css/profile.css';
 import { GlobalData } from '../context/GlobalContext';
 
 
-const Profile = ({ score, incorrectAnswers, questions, difficulty, category, userId }) => {
+const Profile = ({ incorrectAnswers, questions, difficulty, category, userId }) => {
     // const [userData, setUserData] = useState(null);
     const [showInfo, setShowInfo] = useState(false);
     const [leaderboardPosition, setLeaderboardPosition] = useState(null);
     const [savedCategories, setSavedCategories] = useState(null);
     const [selectedPicture, setSelectedPicture] = useState(null);
     const [showPopup, setShowPopup] = useState(false);
-    const { selectedCategory, setSelectedCategory, selectedDifficulty, setSelectedDifficulty, userData, setUserData, results, setResults } = useContext(GlobalData);
+    const { selectedCategory, setSelectedCategory, selectedDifficulty, setSelectedDifficulty, userData, setUserData, results, setResults, gameResults, setGameResults } = useContext(GlobalData);
     const games = userData?.games;
+    const latestGameResult = gameResults[gameResults.length - 1];
     const [copied, setCopied] = useState(false);
+    const [score, setScore] = useState(null);
 
 
-    const clearGames = () => {
-        setUserData(prevUserData => ({
-            ...prevUserData,
-            games: []
-        }));
+
+    // const clearGames = () => {
+    //     setUserData(prevUserData => ({
+    //         ...prevUserData,
+    //         games: []
+    //     }));
+    // };
+
+    const clearGames = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            const headers = {
+                'Authorization': `Bearer ${token}`
+            };
+            await axios.delete("/api/games", { headers });
+            setGames([]);
+        } catch (error) {
+            console.error('Error clearing games:', error);
+        }
     };
+    const fetchGameData = async () => {
+        try {
+            const response = await axios.get("/api/games");
+            const gameData = response.data;
+            // Use gameData to construct a shareable link or perform other actions
+        } catch (error) {
+            console.error('Error fetching game data:', error);
+        }
+    };
+    
 
     useEffect(() => {
         console.log(games);
-    }, [games])
+    }, [games]);
+
+
+    const generateShareableLink = (gameData) => {
+        // Construct the shareable link with user-specific data
+        if (userData) {
+          const { category, difficulty, questions } = gameData;
+          const userId = userData ? userData.id : ''; // Assuming userData contains the user ID
+          const link = `https://triviamindmeld.netlify.app/game-room/play?category=${encodeURIComponent(category)}&difficulty=${encodeURIComponent(difficulty)}&userId=${encodeURIComponent(
+            userData.id)}`;
+    
+          return link;
+        }
+        return "";
+      };
+
 
     const copyToClipboard = async (text) => {
         try {
@@ -48,55 +89,9 @@ const Profile = ({ score, incorrectAnswers, questions, difficulty, category, use
     };
 
 
-    // const [gameId, setGameId] = useState(null);
-
-    // useEffect(() => {
-    //     const startNewGame = async () => {
-    //         try {
-    //             const token = localStorage.getItem('token'); 
-    //             const headers = {
-    //                 'Authorization': `Bearer ${token}`
-    //             };
-    //             const userDataResponse = await axios.get("api/users/me", { headers });
-    //             const userId = userDataResponse.data.userId;
-
-    //             const response = await axios.post('/api/game/start', { userId, categories: savedCategories }, { headers });
-    //             setGameId(response.data.gameId);
-    //         } catch (error) {
-    //             console.error('Error starting a new game:', error);
-    //         }
-    //     };
-
-    //     startNewGame();
-    // }, []);
-
     useEffect(() => {
 
-        //     const fetchLeaderboardPosition = async (difficulty) => {
-        //         try {
-        //             const response = await axios.get(`api/leaderboard/${difficulty}`);
-        //             setLeaderboardPosition(response.data.position);
-        //         } catch (error) {
-        //             console.log('Error fetching leaderboard position.');
-        //         }
-        //     };
 
-        // const fetchSavedCategories = async () => {
-        //     try {
-        //         const response = await axios.get("api/categories");
-        //         setSavedCategories(response.data);
-        //     } catch (error) {
-        //         console.log('Error fetching saved categories');
-        //     }
-        // };
-
-
-        // fetchGameData();
-
-        //     fetchLeaderboardPosition("easy");
-        //     fetchLeaderboardPosition("medium");
-        //     fetchLeaderboardPosition("hard");
-        // fetchSavedCategories();
     }, []);
 
 
@@ -136,6 +131,14 @@ const Profile = ({ score, incorrectAnswers, questions, difficulty, category, use
         setShowInfo(!showInfo);
     }
 
+
+    useEffect(() => {
+        const storedScore = localStorage.getItem('score');
+        if (storedScore) {
+          setScore(JSON.parse(storedScore));
+        }
+      }, []);
+
     return (
         <div className="profileContainer">
             <h2>Welcome to Your Profile, {userData && userData.username}!</h2>
@@ -157,22 +160,22 @@ const Profile = ({ score, incorrectAnswers, questions, difficulty, category, use
                                     />
                                 </li>
                             ))}
-                        <button onClick={handleSavedPictures}>Save</button>
+                            <button onClick={handleSavedPictures}>Save</button>
                         </ul>
                     </div>
                 )}
 
-            {userData && (
-                <div className="userDetails">
-                    <button className="userDetailsButton" onClick={toggleUserInfo}> Your info: </button>
-                    {showInfo && (
-                        <div className="basicUserInfo">
-                            <p>Username: {userData.username}</p>
-                            <p>Email: {userData.email}</p>
-                        </div>
-                    )}
-                </div>
-            )}
+                {userData && (
+                    <div className="userDetails">
+                        <button className="userDetailsButton" onClick={toggleUserInfo}> Your info: </button>
+                        {showInfo && (
+                            <div className="basicUserInfo">
+                                <p>Username: {userData.username}</p>
+                                <p>Email: {userData.email}</p>
+                            </div>
+                        )}
+                    </div>
+                )}
             </div>
 
             <div className="gameResults">
@@ -181,8 +184,9 @@ const Profile = ({ score, incorrectAnswers, questions, difficulty, category, use
                     <div>
                         <p>Category: {games[games.length - 1].category}</p>
                         <p>Difficulty: {games[games.length - 1].difficulty}</p>
-                        <a href={`/play?category=${encodeURIComponent(games[games.length - 1].category)}&difficulty=${encodeURIComponent(games[games.length - 1].difficulty)}`}>Play this game</a>
-                        <button onClick={() => copyToClipboard(`/play?category=${encodeURIComponent(games[games.length - 1].category)}&difficulty=${encodeURIComponent(games[games.length - 1].difficulty)}`)}>Copy link</button>
+                        <p>Score: {score}/10</p>
+                        {/* <a href={`https://triviamindmeld.netlify.app/play?category=${encodeURIComponent(games[games.length - 1].category)}&difficulty=${encodeURIComponent(games[games.length - 1].difficulty)}`}>Play this game</a>
+                        <button onClick={() => copyToClipboard(`/play?category=${encodeURIComponent(games[games.length - 1].category)}&difficulty=${encodeURIComponent(games[games.length - 1].difficulty)}`)}>Copy link</button> */}
                     </div>
                 )}
             </div>
@@ -205,13 +209,41 @@ const Profile = ({ score, incorrectAnswers, questions, difficulty, category, use
                         <div key={index}>
                             <p>Category: {game.category}</p>
                             <p>Difficulty: {game.difficulty}</p>
-
-                            <a href={`/play?category=${encodeURIComponent(game.category)}&difficulty=${encodeURIComponent(game.difficulty)}`}>Play this game</a>
-                            <button onClick={() => copyToClipboard(`https://triviamindmeld.netlify.app/play?category=${encodeURIComponent(game.category)}&difficulty=${encodeURIComponent(game.difficulty)}`)}>Copy link</button>
+                            {/* <a href={`https://triviamindmeld.netlify.app/game-room/play?category=${encodeURIComponent(game.category)}&difficulty=${encodeURIComponent(game.difficulty)}`}>Play this game</a>
+                            <button onClick={() => copyToClipboard(`https://triviamindmeld.netlify.app/game-room/play?category=${encodeURIComponent(game.category)}&difficulty=${encodeURIComponent(game.difficulty)}`)}>Copy link</button> */}
                         </div>
                     ))}
-                                        {games && games.length > 0 && <button className="clearGamesButton" onClick={clearGames}>Clear Games</button>}
+                    {games && games.length > 0 && <button className="clearGamesButton" onClick={clearGames}>Clear Games</button>}
 
+                </div>
+                <div className="cheatsheetContainer">
+                    <ul className="cheatsheet">
+                    <p>Category Cheatsheet: </p>
+                            <li>9 = General knowledge</li>
+                            <li>10 = Books</li>
+                            <li>11 = Film</li>
+                            <li>12 = Music</li>
+                            <li>13 = Musicals</li>
+                            <li>14 = TV</li>
+                            <li>15 = Video Games</li>
+                            <li>16 = Board Games</li>
+                            <li>17 = Science/Nature</li>
+                            <li>18 = Computers</li>
+                            <li>19 = Math</li>
+                            <li>20 = Mythology</li>
+                            <li>21 = Sports</li>
+                            <li>22 = Geography</li>
+                            <li>23 = History</li>
+                            <li>24 = Politics</li>
+                            <li>25 = Art</li>
+                            <li>26 = Celebrities</li>
+                            <li>27 = Animals</li>
+                            <li>28 = Vehicles</li>
+                            <li>29 = Comics</li>
+                            <li>30 = Gadgets</li>
+                            <li>31 = Anime/Manga</li>
+                            <li>32 = Animation</li>
+                    </ul>
                 </div>
             </div>
             <div className="logoutContainer">

@@ -37,12 +37,13 @@
 
   
   .profileLink li a:hover{
+    position: fixed;
     color: #03030898;
   }
 
   .profileLink{
     list-style-type: none;
-    position:absolute;
+    position:fixed;
     top: 8px;
     right: 10px;
     width: 200px;

@@ -8,6 +8,8 @@ export default function GlobalContext({ children }) {
     const [ score, setScore ] = useState(0);
     const [triviaData, setTriviaData] = useState([]);
     const [ results, setResults ] = useState([]);
+    const [gameResults, setGameResults] = useState([]);
+
 
 
     const handleSelectedCategory = (category) => {
@@ -22,6 +24,10 @@ export default function GlobalContext({ children }) {
       setUserData(data);
   };
 
+  const updateGameResults = (newResult) => {
+    setGameResults([...gameResults, newResult]);
+  };
+
     const data = {
         selectedCategory,
         setSelectedCategory,
@@ -34,7 +40,9 @@ export default function GlobalContext({ children }) {
         triviaData,
         setTriviaData,
         results,
-        setResults
+        setResults,
+        gameResults,
+        setGameResults,
     }
   return <GlobalData.Provider value={data}> { children } </GlobalData.Provider>
 }
